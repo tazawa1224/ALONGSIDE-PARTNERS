@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALONGSIDE PARTNERS — 人生のそばに、わたしたちがいる。</title>
+<meta name="description" content="ALONGSIDE PARTNERS｜金融コンサルティング・デジタル/キャリア支援・ビジネス支援。答えを押し付けず、現状を一緒に整理し、あなたらしい選択肢へ伴走します。無料相談受付中。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+<!-- FV の読み込みアニメーション準備（JS が動く & 動きを減らす設定でない時だけ。初回描画前に付ける） -->
+<script>if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('fv-anim');</script>
+<link rel="preload" as="image" href="img/fv/fv-woman.webp">
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header" id="siteHeader">
+  <div class="header__inner">
+    <a class="brand" href="#hero" aria-label="ALONGSIDE PARTNERS ホームへ">
+      <span class="brand__mark" aria-hidden="true">
+        <img class="brand__logo" src="img/logo-mark.webp" alt="" width="186" height="192">
+      </span>
+      <span class="brand__name">ALONGSIDE&nbsp;PARTNERS</span>
+    </a>
+
+    <nav class="nav" id="primaryNav" aria-label="メインナビゲーション">
+      <ul class="nav__list">
+        <li><a href="#concept">CONCEPT</a></li>
+        <li><a href="#service">SERVICE</a></li>
+        <li><a href="#works">WORKS</a></li>
+        <li><a href="#message">MESSAGE</a></li>
+        <li><a href="#news">NEWS</a></li>
+      </ul>
+    </nav>
+
+    <a class="btn btn--primary header__cta" href="#contact">
+      <span class="btn__pulse" aria-hidden="true"></span>無料で相談する <span class="btn__arrow" aria-hidden="true">→</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= 1. FV ================= -->
+  <section class="fv" id="hero">
+    <!-- 背景（ガラス帯・斜線） -->
+    <div class="fv__bg" aria-hidden="true">
+      <img class="fv__glass" src="img/fv/fv-glass.webp" alt="" width="1448" height="1086">
+      <img class="fv__lines" src="img/fv/fv-lines.webp" alt="" width="1619" height="971">
+    </div>
+
+    <!-- 写真コラージュ -->
+    <div class="fv__visual">
+      <img class="fv__city" src="img/fv/fv-city.webp" alt="" width="1400" height="600" aria-hidden="true">
+      <img class="fv__desk" src="img/fv/fv-desk.webp" alt="" width="1448" height="1086" aria-hidden="true">
+      <img class="fv__woman" src="img/fv/fv-woman.webp" alt="空を見上げて穏やかに微笑む女性" width="1122" height="1402">
+      <img class="fv__leaves" src="img/fv/fv-leaves.webp" alt="" width="1448" height="1086" aria-hidden="true">
+      <img class="fv__wyl" src="img/fv/fv-with-your-life.webp" alt="With Your Life." width="1400" height="467">
+    </div>
+
+    <div class="container fv__inner">
+      <div class="fv__copy">
+        <h1 class="fv__title">
+          <span class="fv__line"><span>あなたらしい</span></span>
+          <span class="fv__line"><span>これからを、</span></span>
+          <span class="fv__line"><span>いっしょに。</span></span>
+        </h1>
+        <p class="fv__lead">
+          <span>未来への不安を、ひとりで抱え込まないために。<br>
+          現状を一緒に整理し、あなたらしい選択肢へ。<br>
+          隣を並んで進む、伴走型の支援を。</span>
+        </p>
+        <div class="fv__actions">
+          <a class="btn btn--primary btn--lg" href="#contact">
+            <span class="btn__pulse" aria-hidden="true"></span>
+            <svg class="btn__icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 5.5h16v10H10l-4 3.5v-3.5H4z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="8.5" cy="10.5" r="1.1" fill="currentColor"/><circle cx="12" cy="10.5" r="1.1" fill="currentColor"/><circle cx="15.5" cy="10.5" r="1.1" fill="currentColor"/></svg>
+            無料で相談する <span class="btn__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="btn btn--ghost btn--lg" href="#service">サービスを見る <span class="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 2. CONCEPT ================= -->
+  <section class="concept" id="concept">
+    <!-- FVとの境目（右上がりの斜め）と背景の装飾 -->
+    <div class="concept__bg" aria-hidden="true">
+      <img class="concept__glass" src="img/fv/fv-glass.webp" alt="" width="1448" height="1086" loading="lazy">
+      <img class="concept__leaves concept__leaves--l" src="img/fv/fv-leaves.webp" alt="" width="1448" height="1086" loading="lazy">
+      <img class="concept__leaves concept__leaves--r" src="img/fv/fv-leaves.webp" alt="" width="1448" height="1086" loading="lazy">
+      <svg class="concept__edge" viewBox="0 0 100 100" preserveAspectRatio="none"><line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke"/></svg>
+    </div>
+
+    <div class="container concept__inner">
+      <div class="concept__intro" data-reveal>
+        <p class="eyebrow concept__eyebrow"><span>CONCEPT</span> / なぜ、わたしたちがいるのか</p>
+        <h2 class="concept__title">不安を、ひとりで<br>抱え込まないために。</h2>
+        <p class="concept__lead">わたしたちは、答えを押し付ける存在ではありません。<br>まず、あなたの現状を一緒に整理し、対話を重ねながら、<br>あなたらしい選択肢を見つけていく。<br>誠実に、そして継続的に、隣で伴走します。</p>
+        <p class="concept__sign" aria-hidden="true">WITH YOUR LIFE.</p>
+      </div>
+
+      <!-- 伴走の3ステップ -->
+      <ol class="csteps">
+        <li class="cstep" data-reveal>
+          <div class="cstep__in">
+            <img class="cstep__img" src="img/concept/concept-01.webp" alt="資料にペンで書き込みながら状況を整理する手元" width="520" height="390" loading="lazy">
+            <div class="cstep__body">
+              <span class="cstep__no">01</span>
+              <h3 class="cstep__title">現状を整理する</h3>
+              <p>いま抱えている不安やお金・働き方の状況を、一緒に可視化します。</p>
+            </div>
+          </div>
+        </li>
+        <li class="cstep" data-reveal>
+          <div class="cstep__in">
+            <img class="cstep__img" src="img/concept/concept-02.webp" alt="身振りを交えて対話する様子" width="420" height="315" loading="lazy">
+            <div class="cstep__body">
+              <span class="cstep__no">02</span>
+              <h3 class="cstep__title">対話で選択肢を描く</h3>
+              <p>正解を押し付けず、対話を重ねて、あなたらしい選択肢を並べます。</p>
+            </div>
+          </div>
+        </li>
+        <li class="cstep" data-reveal>
+          <div class="cstep__in">
+            <img class="cstep__img" src="img/concept/concept-03.webp" alt="緑の向こうに広がる街並み" width="440" height="330" loading="lazy">
+            <div class="cstep__body">
+              <span class="cstep__no">03</span>
+              <h3 class="cstep__title">継続して伴走する</h3>
+              <p>一度きりで終わらせず、進みながら見直し、隣で支え続けます。</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= 3. SERVICE ================= -->
+  <section class="service section" id="service">
+    <div class="service__bg" aria-hidden="true">
+      <img class="service__glass" src="img/service/service-glass.webp" alt="" width="1200" height="900" loading="lazy">
+      <img class="service__band" src="img/service/service-band.webp" alt="" width="1400" height="788" loading="lazy">
+      <img class="service__leaves service__leaves--t" src="img/service/service-leaves.webp" alt="" width="1200" height="900" loading="lazy">
+      <img class="service__leaves service__leaves--b" src="img/service/service-leaves.webp" alt="" width="1200" height="900" loading="lazy">
+    </div>
+    <div class="container">
+      <header class="service__head" data-reveal>
+        <div>
+          <p class="service__eyebrow">SERVICE<span>サービス</span></p>
+          <h2 class="service__title">その悩みに、<br><em>並走する3つの支援。</em></h2>
+          <p class="service__lead">暮らしと仕事のこれからを、ともに考え、<br>ともに進むための3つのサービスをご用意しています。</p>
+        </div>
+        <img class="service__logo" src="img/service/service-logo.webp" alt="SERVICE — Support your life" width="900" height="305" loading="lazy">
+      </header>
+
+      <div class="service__list">
+        <a class="svc" href="service-finance.html" data-reveal aria-label="金融コンサルティングの詳細を見る">
+          <div class="svc__card">
+            <span class="svc__plate" aria-hidden="true"></span>
+            <h3 class="svc__head"><span class="svc__idx">01</span><span class="svc__title">金融コンサルティング</span></h3>
+            <p class="svc__desc">将来のお金の不安を丁寧に整理し、<br>あなたらしい生活設計をともに描きます。</p>
+            <ul class="svc__points">
+              <li>資産形成・家計改善のご相談</li>
+              <li>将来に向けた生活設計のサポート</li>
+            </ul>
+          </div>
+          <div class="svc__photo"><div class="svc__clip"><img class="svc__img" src="img/service/service-01.webp" alt="資料のグラフにペンで書き込みながら検討している手元" width="1100" height="519" loading="lazy"></div></div>
+        </a>
+
+        <a class="svc svc--rev" href="service-career-digital.html" data-reveal aria-label="デジタル・キャリア支援の詳細を見る">
+          <div class="svc__card">
+            <span class="svc__plate" aria-hidden="true"></span>
+            <h3 class="svc__head"><span class="svc__idx">02</span><span class="svc__title">デジタル・キャリア支援</span></h3>
+            <p class="svc__desc">デジタルスキルの習得と働き方の見直しで、<br>自分らしく働ける未来づくりを支援します。</p>
+            <ul class="svc__points">
+              <li>デジタルスキルの習得支援</li>
+              <li>キャリア形成・働き方の見直し</li>
+            </ul>
+          </div>
+          <div class="svc__photo"><div class="svc__clip"><img class="svc__img" src="img/service/service-02.webp" alt="ノートパソコンの上に浮かぶ成長グラフを指し示す手元" width="1100" height="603" loading="lazy"></div></div>
+        </a>
+
+        <a class="svc" href="service-business.html" data-reveal aria-label="ビジネス支援の詳細を見る">
+          <div class="svc__card">
+            <span class="svc__plate" aria-hidden="true"></span>
+            <h3 class="svc__head"><span class="svc__idx">03</span><span class="svc__title">ビジネス支援</span></h3>
+            <p class="svc__desc">事業の立ち上げや運営改善を通じて、<br>安定した成長をサポートします。</p>
+            <ul class="svc__points">
+              <li>事業の立ち上げ・運営改善</li>
+              <li>集客・販促のサポート</li>
+            </ul>
+          </div>
+          <div class="svc__photo"><div class="svc__clip"><img class="svc__img" src="img/service/service-03.webp" alt="笑顔で相談に応じる女性と向かい合う2人" width="1100" height="600" loading="lazy"></div></div>
+        </a>
+      </div>
+
+      <div class="service__cta" data-reveal>
+        <a class="btn btn--primary btn--lg service__btn" href="#contact">支援内容を詳しく見る <span class="btn__arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. WORKS ================= -->
+  <section class="works section" id="works">
+    <div class="works__bg" aria-hidden="true">
+      <img class="works__light" src="img/works/works-light.webp" alt="" width="1400" height="933" loading="lazy">
+      <img class="works__leaves" src="img/works/works-leaves.webp" alt="" width="1400" height="1050" loading="lazy">
+    </div>
+    <div class="container">
+      <header class="works__head" data-reveal>
+        <div>
+          <p class="works__eyebrow">WORKS<span>/ 相談事例</span></p>
+          <h2 class="works__title">あなたに近い誰かも、<br><em>ここから進みはじめた。</em></h2>
+          <p class="works__lead">「誰が × 何を」で見る、7つの実例。</p>
+        </div>
+        <img class="works__logo" src="img/works/works-logo.webp" alt="WORKS — Case studies &amp; stories" width="900" height="236" loading="lazy">
+      </header>
+
+      <ul class="works__list">
+        <li class="work work--lead" data-reveal>
+          <div class="work__body">
+            <p class="work__head"><span class="work__no">01</span><span class="work__who">新婚世帯の家計見直し</span></p>
+            <p class="work__what">固定費整理 / 貯蓄習慣の構築 / 住まい購入に向けた準備</p>
+          </div>
+          <img class="work__img" src="img/works/works-01.webp" alt="ノートパソコンをのぞき込みながら笑顔で話す夫婦" width="1500" height="476" loading="lazy">
+        </li>
+        <li class="work" data-reveal>
+          <div class="work__body">
+            <p class="work__head"><span class="work__no">02</span><span class="work__who">子育て世帯の教育資金相談</span></p>
+            <p class="work__what">教育費と生活費の可視化 / 将来不安の軽減 / 積立計画の設計</p>
+          </div>
+          <img class="work__img" src="img/works/works-02.webp" alt="空を見上げて笑う母親と娘" width="900" height="429" loading="lazy">
+        </li>
+        <li class="work" data-reveal>
+          <div class="work__body">
+            <p class="work__head"><span class="work__no">03</span><span class="work__who">転職前のキャリア整理</span></p>
+            <p class="work__what">強みの棚卸し / 働き方の優先順位整理 / 自分らしさを軸にした転職活動支援</p>
+          </div>
+          <img class="work__img" src="img/works/works-03.webp" alt="あごに手を当てて考えごとをする男性" width="900" height="422" loading="lazy">
+        </li>
+        <li class="work" data-reveal>
+          <div class="work__body">
+            <p class="work__head"><span class="work__no">04</span><span class="work__who">副業スタートの伴走支援</span></p>
+            <p class="work__what">情報発信の方向性整理 / 学習計画の設計 / 未経験から初受注までの支援</p>
+          </div>
+          <img class="work__img" src="img/works/works-04.webp" alt="観葉植物とコーヒーが置かれた机の上のノートパソコン" width="900" height="417" loading="lazy">
+        </li>
+        <li class="work" data-reveal>
+          <div class="work__body">
+            <p class="work__head"><span class="work__no">05</span><span class="work__who">個人事業主の売上改善</span></p>
+            <p class="work__what">提案導線の見直し / サービス設計改善 / 継続相談が増える仕組みづくり</p>
+          </div>
+          <img class="work__img" src="img/works/works-05.webp" alt="売上グラフが表示されたノートパソコン" width="900" height="443" loading="lazy">
+        </li>
+        <li class="work" data-reveal>
+          <div class="work__body">
+            <p class="work__head"><span class="work__no">06</span><span class="work__who">ライフイベント前の将来設計</span></p>
+            <p class="work__what">結婚・出産・仕事の両立を見据えた相談 / 安心して選択できる行動計画の明確化</p>
+          </div>
+          <img class="work__img" src="img/works/works-06.webp" alt="ノートにライフプランの図を書き込む手元" width="900" height="387" loading="lazy">
+        </li>
+        <li class="work" data-reveal>
+          <div class="work__body">
+            <p class="work__head"><span class="work__no">07</span><span class="work__who">小規模法人の立ち上げ伴走</span></p>
+            <p class="work__what">事業方向性の整理 / 初期導線設計 / スタート時の判断負担軽減</p>
+          </div>
+          <img class="work__img" src="img/works/works-07.webp" alt="向かい合って笑顔で話すスーツの男性" width="900" height="402" loading="lazy">
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= 5. MESSAGE ================= -->
+  <section class="message section" id="message">
+    <div class="message__bg" aria-hidden="true">
+      <img class="message__layer" src="img/message/message-curve.webp" alt="" width="2000" height="1000" loading="lazy">
+      <img class="message__layer" src="img/message/message-slash.webp" alt="" width="2000" height="1000" loading="lazy">
+      <img class="message__layer" src="img/message/message-wave.webp" alt="" width="2000" height="1000" loading="lazy">
+      <img class="message__layer" src="img/message/message-lines.webp" alt="" width="2400" height="1200" loading="lazy">
+      <img class="message__leaves message__leaves--l" src="img/message/message-leaves-l.webp" alt="" width="1134" height="490" loading="lazy">
+      <img class="message__leaves message__leaves--r" src="img/message/message-leaves-r.webp" alt="" width="1134" height="490" loading="lazy">
+      <img class="message__branch" src="img/message/message-branch.webp" alt="" width="928" height="544" loading="lazy">
+    </div>
+    <div class="message__inner">
+      <figure class="message__media" data-reveal>
+        <img src="img/message/message-photo.webp" alt="青空と街並みを背に、風に髪をなびかせて遠くを見つめる女性" width="1400" height="1390" loading="lazy">
+      </figure>
+      <div class="message__body" data-reveal>
+        <p class="message__eyebrow">MESSAGE<span>/ 代表メッセージ</span></p>
+        <h2 class="message__title">ともに考え、<br>ともに進む<wbr>パートナーとして。</h2>
+        <p class="message__text">
+          私たちは、一方的に答えを提供する存在ではありません。<br>
+          ひとりひとりの想いに寄り添い、課題をともに整理し、最適な一歩を一緒に見つけていく。<br>
+          その積み重ねが、いつの間にか大きな変化となり、<br>
+          あなたのこれからを支える力になると信じています。
+        </p>
+        <a class="btn btn--primary btn--lg message__btn" href="#contact">メッセージを詳しく見る <span class="btn__arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6. NEWS ================= -->
+  <section class="news section" id="news">
+    <div class="news__bg" aria-hidden="true">
+      <img class="news__lines" src="img/message/message-lines.webp" alt="" width="2400" height="1200" loading="lazy">
+      <img class="news__glass" src="img/service/service-glass.webp" alt="" width="1200" height="900" loading="lazy">
+      <img class="news__branch" src="img/message/message-branch.webp" alt="" width="928" height="544" loading="lazy">
+      <img class="news__leaves" src="img/message/message-leaves-l.webp" alt="" width="1134" height="490" loading="lazy">
+    </div>
+    <div class="container news__inner">
+      <header class="news__head" data-reveal>
+        <p class="news__eyebrow">NEWS<span>/ お知らせ</span></p>
+        <h2 class="news__heading">お知らせ</h2>
+        <p class="news__lead">サービスや取り組み、最新の情報をお届けします。</p>
+      </header>
+      <div class="news__grid" data-reveal>
+        <article class="news__pick">
+          <div class="news__pick-media"><img class="news__pick-img" src="img/news/news-pickup.webp" alt="青空の下に広がる緑と街並み" width="1230" height="610" loading="lazy"></div>
+          <div class="news__pick-body">
+            <p class="news__pick-label">PICK UP</p>
+            <time class="news__pick-date" datetime="2024-06-01">2024.06.01</time>
+            <h3 class="news__pick-title">公式ウェブサイトを<wbr>リニューアルしました</h3>
+            <p class="news__pick-text">より見やすく、情報を探しやすい構成に<wbr>サイトを刷新しました。</p>
+            <span class="news__pick-arrow" aria-hidden="true">→</span>
+          </div>
+        </article>
+        <ol class="news__list" reversed>
+          <li class="news__item">
+            <time class="news__date" datetime="2024-05-20"><span class="news__y">2024.</span><span class="news__md">05.20</span></time>
+            <p class="news__title">提供メニューを更新しました</p>
+          </li>
+          <li class="news__item">
+            <time class="news__date" datetime="2024-04-01"><span class="news__y">2024.</span><span class="news__md">04.01</span></time>
+            <p class="news__title">事業内容説明資料の更新、<wbr>実績紹介の追加</p>
+          </li>
+          <li class="news__item">
+            <time class="news__date" datetime="2024-03-15"><span class="news__y">2024.</span><span class="news__md">03.15</span></time>
+            <p class="news__title">パートナー企業との<wbr>新規プロジェクトを開始</p>
+          </li>
+          <li class="news__item">
+            <time class="news__date" datetime="2024-02-25"><span class="news__y">2024.</span><span class="news__md">02.25</span></time>
+            <p class="news__title">採用情報およびお問い合わせ<wbr>導線を改善しました</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 8. CONTACT ================= -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <header class="sec-head sec-head--center" data-reveal>
+        <p class="eyebrow eyebrow--accent">CONTACT / お問い合わせ</p>
+        <h2 class="sec-title">まず、無料で<br class="br-sp">話すだけでも。</h2>
+      </header>
+
+      <form class="form" id="contactForm" novalidate data-reveal>
+        <div class="form__row">
+          <div class="field">
+            <label for="f-name">お名前 <span class="req">必須</span></label>
+            <input type="text" id="f-name" name="name" autocomplete="name" required aria-required="true">
+            <p class="field__err" data-err-for="f-name" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-email">メールアドレス <span class="req">必須</span></label>
+            <input type="email" id="f-email" name="email" autocomplete="email" required aria-required="true">
+            <p class="field__err" data-err-for="f-email" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="form__row">
+          <div class="field">
+            <label for="f-company">会社名 <span class="opt">任意</span></label>
+            <input type="text" id="f-company" name="company" autocomplete="organization">
+          </div>
+          <div class="field">
+            <label for="f-tel">電話番号 <span class="opt">任意</span></label>
+            <input type="tel" id="f-tel" name="tel" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-type">お問い合わせ種別 <span class="req">必須</span></label>
+          <select id="f-type" name="type" required aria-required="true">
+            <option value="">選択してください</option>
+            <option value="service">サービスに関するご相談</option>
+            <option value="partner">協業・提携について</option>
+            <option value="recruit">採用について</option>
+            <option value="other">その他</option>
+          </select>
+          <p class="field__err" data-err-for="f-type" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="f-body">お問い合わせ内容 <span class="req">必須</span></label>
+          <textarea id="f-body" name="body" rows="5" required aria-required="true"></textarea>
+          <p class="field__err" data-err-for="f-body" aria-live="polite"></p>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--lg btn--block">
+          <span class="btn__pulse" aria-hidden="true"></span>送信内容を確認する
+        </button>
+        <p class="form__note">※本フォームはデモのため、実際には送信されません。</p>
+
+        <div class="form__done" id="formDone" role="status" hidden>
+          <span class="form__done-mark" aria-hidden="true">
+            <svg viewBox="0 0 48 48" width="48" height="48"><path d="M10 25 L20 35 L38 14" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="check-path"/></svg>
+          </span>
+          <p class="form__done-title">送信内容を確認しました</p>
+          <p class="form__done-sub">本フォームはデモのため送信されません。実際のお問い合わせは近日公開予定です。</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= 9. FOOTER ================= -->
+  <footer class="site-footer" id="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <span class="brand__mark" aria-hidden="true">
+          <img class="brand__logo" src="img/logo-mark.webp" alt="" width="186" height="192">
+        </span>
+        <span class="footer__name">ALONGSIDE PARTNERS</span>
+        <p class="footer__tag">人生のそばに、わたしたちがいる。</p>
+      </div>
+      <nav class="footer__nav" aria-label="フッターナビゲーション">
+        <ul>
+          <li><a href="#concept">CONCEPT</a></li>
+          <li><a href="#service">SERVICE / 事業内容</a></li>
+          <li><a href="#works">WORKS</a></li>
+          <li><a href="#message">MESSAGE / 代表挨拶</a></li>
+          <li><a href="#news">NEWS</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+      <div class="footer__contact">
+        <p><span>Address</span>〒000-0000 東京都渋谷区〇〇 0-0-0</p>
+        <p><span>Email</span><a href="mailto:example@example.jp">example@example.jp</a></p>
+        <p><span>Tel</span><a href="tel:00-0000-0000">00-0000-0000</a></p>
+      </div>
+    </div>
+    <p class="footer__copy">© 2024 ALONGSIDE PARTNERS All Rights Reserved.</p>
+  </footer>
+
+</main>
+
+<!-- モバイル下部固定CTA -->
+<a class="mobile-cta" href="#contact" id="mobileCta">
+  <span class="btn__pulse" aria-hidden="true"></span>無料で相談する
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>
