@@ -195,146 +195,74 @@
   }
 
   /* --------------------------------------------------------------
-     7. SERVICE：カードと写真で1本の斜めの帯をつくる（PCのみ）
-        帯の上辺・下辺は右上がり、カードと写真の境目は平行な斜め。
-        帯どうしが平行に並ぶよう、行の間隔もここで決める。
+     7. WORKS：事例のスライド（中央の1枚＋右奥に次の3枚。矢印・ドット・スワイプ・左右キー）
      -------------------------------------------------------------- */
-  var svcRows = Array.prototype.slice.call(document.querySelectorAll('.svc'));
-  var svcList = document.querySelector('.service__list');
-  var svcHead = document.querySelector('.service__head');
-  var svcMq = window.matchMedia('(min-width: 961px)');
-  var SVC_GAP = 22;   // 帯と帯のすき間
-  var svcSection = svcList ? svcList.closest('section') : null;
+  var works = document.getElementById('works');
+  var slider = works && works.querySelector('.works__slider');
+  if (slider) {
+    var slides = Array.prototype.slice.call(slider.querySelectorAll('.work'));
+    var count = slides.length;
+    var current = 0;
+    var busy = false;
+    var dotsWrap = slider.querySelector('.works__dots');
 
-  // セクション基準の位置（reveal の transform で offsetParent が変わっても同じ値になるよう親をたどる）
-  function posIn(el) {
-    var x = 0, y = 0;
-    while (el && el !== svcSection) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; }
-    return { x: x, y: y };
-  }
-
-  // 角を丸めた多角形の path 文字列（pts は [x, y] の配列、ox/oy で原点をずらす）
-  function roundedPath(pts, r, ox, oy) {
-    var n = pts.length, d = '';
-    for (var i = 0; i < n; i++) {
-      var p = pts[i], a = pts[(i + n - 1) % n], b = pts[(i + 1) % n];
-      var la = Math.hypot(a[0] - p[0], a[1] - p[1]), lb = Math.hypot(b[0] - p[0], b[1] - p[1]);
-      var rr = Math.min(r, la / 2, lb / 2);
-      var p1 = [p[0] + (a[0] - p[0]) * rr / la, p[1] + (a[1] - p[1]) * rr / la];
-      var p2 = [p[0] + (b[0] - p[0]) * rr / lb, p[1] + (b[1] - p[1]) * rr / lb];
-      var f = function (q) { return (q[0] - ox).toFixed(1) + ' ' + (q[1] - oy).toFixed(1); };
-      d += (i === 0 ? 'M' : 'L') + f(p1) + 'Q' + f(p) + ' ' + f(p2);
-    }
-    return "path('" + d + "Z')";
-  }
-
-  // 多角形の外接矩形に要素を置き、その中に形を描く
-  function placeShape(el, shapeEl, pts, r, dx) {
-    var xs = pts.map(function (q) { return q[0]; }), ys = pts.map(function (q) { return q[1]; });
-    var minX = Math.min.apply(null, xs), minY = Math.min.apply(null, ys);
-    el.style.left = (minX - dx) + 'px';
-    el.style.top = minY + 'px';
-    el.style.width = (Math.max.apply(null, xs) - minX) + 'px';
-    el.style.height = (Math.max.apply(null, ys) - minY) + 'px';
-    shapeEl.style.clipPath = roundedPath(pts, r, minX, minY);
-  }
-
-  function resetSvc() {
-    svcRows.forEach(function (row) {
-      row.style.marginTop = '';
-      ['.svc__plate', '.svc__photo'].forEach(function (s) { row.querySelector(s).removeAttribute('style'); });
-      row.querySelector('.svc__clip').style.clipPath = '';
+    var dots = slides.map(function (s, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'works__dot';
+      b.setAttribute('aria-label', '事例' + (i + 1) + 'を表示');
+      b.addEventListener('click', function () { goTo(i); });
+      dotsWrap.appendChild(b);
+      return b;
     });
-    if (svcList) svcList.style.paddingBottom = '';
-    if (svcHead) svcHead.style.marginBottom = '';
-  }
 
-  // 1行分の形を計算して描き、帯の上辺・下辺の式を返す（座標は行の左上が原点）
-  function shapeSvc(row, B) {
-    var card = row.querySelector('.svc__card');
-    var cs = getComputedStyle(row);
-    var v = function (name) { return parseFloat(cs.getPropertyValue(name)); };
-    var k = v('--k'), st = v('--st'), sb = v('--sb');
-    var W = row.clientWidth, H = card.offsetHeight, cw = card.offsetWidth, cl = card.offsetLeft;
-    var g = 14 * Math.sqrt(1 + k * k);   // カードと写真のすき間（垂直距離で約14px）
-    var top, bot, C, P;
-
-    if (!row.classList.contains('svc--rev')) {
-      // カードが左：上辺はカード左上を通り、境目はカード右上から左下へ
-      top = function (x) { return -st * x; };
-      bot = function (x) { return H - sb * x; };
-      var yT = top(cw);
-      var yDB = (H - sb * cw - sb * k * yT) / (1 - sb * k);           // 境目と下辺の交点
-      C = [[0, 0], [cw, yT], [cw - k * (yDB - yT), yDB], [0, H]];
-      var xPT = (cw + g + k * yT) / (1 - k * st);                      // 写真左辺と上辺の交点
-      var yPB = (H - sb * (cw + g) - sb * k * yT) / (1 - sb * k);      // 写真左辺と下辺の交点
-      var XR = W + B;
-      P = [[xPT, top(xPT)], [XR, top(XR)], [XR, bot(XR)], [cw + g - k * (yPB - yT), yPB]];
-    } else {
-      // カードが右：境目はカード左上 (xd, 0) から左下 (cl, H) へ
-      var xd = cl + k * H;
-      top = function (x) { return -st * (x - xd); };
-      bot = function (x) { return H - sb * (x - cl); };
-      C = [[xd, 0], [W, top(W)], [W, bot(W)], [cl, H]];
-      var xRT = xd - g / (1 - k * st);                                 // 写真右辺と上辺の交点
-      var yRB = (H - sb * (xd - g - cl)) / (1 - sb * k);               // 写真右辺と下辺の交点
-      var XL = -B;
-      P = [[XL, top(XL)], [xRT, top(xRT)], [xd - g - k * yRB, yRB], [XL, bot(XL)]];
+    function render() {
+      slides.forEach(function (s, i) {
+        var d = ((i - current) % count + count) % count;   // 0=中央、1〜3=右奥、最後=ひとつ前
+        var pos = d <= 3 ? String(d) : (d === count - 1 ? 'prev' : 'hidden');
+        s.setAttribute('data-pos', pos);
+        s.setAttribute('aria-hidden', d === 0 ? 'false' : 'true');
+      });
+      dots.forEach(function (b, i) { b.setAttribute('aria-current', i === current ? 'true' : 'false'); });
     }
-    var plate = row.querySelector('.svc__plate');
-    placeShape(plate, plate, C, 26, cl);
-    plate.style.right = plate.style.bottom = 'auto';
-    plate.style.setProperty('--plate', plate.style.clipPath);
-    plate.style.clipPath = '';
-    placeShape(row.querySelector('.svc__photo'), row.querySelector('.svc__clip'), P, 22, 0);
-    return { top: top, bot: bot, W: W, H: H };
-  }
+    function goTo(i) {
+      var next = (i % count + count) % count;
+      if (next === current || busy) return;
+      if (prefersReduced) { current = next; render(); return; }
+      busy = true;   // 文字と写真をいったん消してから板を動かし、着いたところで出し直す
+      works.classList.add('is-switching');
+      setTimeout(function () {
+        current = next;
+        render();
+        setTimeout(function () { works.classList.remove('is-switching'); busy = false; }, 380);
+      }, 200);
+    }
 
-  function shapeAll() {
-    resetSvc();
-    if (!svcMq.matches || !svcRows.length) return;
-    var B = svcRows[0].getBoundingClientRect().left + 40;   // 画面端までの距離（少し余分に）
-    var prev = null, geo;
-    if (svcHead) svcHead.style.marginBottom = '0px';
-    svcRows.forEach(function (row, i) {
-      row.style.marginTop = '0px';
-      geo = shapeSvc(row, B);
-      var X = [-B, geo.W + B], need = -Infinity;
-      if (prev) {
-        // 前の帯の下辺から SVC_GAP だけ離す（直線どうしなので両端で判定すれば足りる）
-        X.forEach(function (x) { need = Math.max(need, prev.y + prev.bot(x) - geo.top(x) + SVC_GAP); });
-      } else if (svcHead) {
-        // 1本目：リード文の右端とロゴの右端の下に収める
-        var lead = svcHead.querySelector('.service__lead'), logo = svcHead.querySelector('.service__logo');
-        var x0 = posIn(row).x;
-        [[lead, 40], [logo, 14]].forEach(function (c) {
-          var el = c[0]; if (!el) return;
-          var pe = posIn(el), xr = pe.x + el.offsetWidth - x0;
-          if (el === lead) {   // ブロック幅ではなく、文字が実際に届いている右端で判定
-            var rg = document.createRange(); rg.selectNodeContents(el);
-            xr = pe.x + (rg.getBoundingClientRect().right - el.getBoundingClientRect().left) - x0;
-          }
-          need = Math.max(need, pe.y + el.offsetHeight + c[1] - geo.top(xr));
-        });
-      }
-      if (need > -Infinity) row.style.marginTop = Math.round(need - posIn(row).y) + 'px';
-      prev = { y: posIn(row).y, bot: geo.bot };
+    slider.querySelector('.works__arrow--prev').addEventListener('click', function () { goTo(current - 1); });
+    slider.querySelector('.works__arrow--next').addEventListener('click', function () { goTo(current + 1); });
+    slides.forEach(function (s, i) {   // 右奥の板を押したらその事例へ
+      s.addEventListener('click', function (e) {
+        if (i !== current) { e.preventDefault(); goTo(i); }
+      });
     });
-    // 最後の帯の左下が行の外へ出る分だけ下に余白を足す
-    var last = svcRows[svcRows.length - 1];
-    var over = Math.max(geo.bot(-B), geo.bot(geo.W + B)) - geo.H;
-    if (svcList && over > 0) svcList.style.paddingBottom = Math.ceil(over) + 'px';
-  }
+    slider.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+    });
 
-  if (svcRows.length) {
-    if ('ResizeObserver' in window) {
-      var svcRO = new ResizeObserver(shapeAll);
-      svcRows.forEach(function (r) { svcRO.observe(r.querySelector('.svc__card')); });
-      if (svcHead) svcRO.observe(svcHead);   // ロゴ画像の読み込みで見出しの高さが変わったとき
-    }
-    window.addEventListener('resize', shapeAll, { passive: true });
-    if (svcMq.addEventListener) svcMq.addEventListener('change', shapeAll);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(shapeAll);
-    shapeAll();
+    var list = slider.querySelector('.works__list');
+    var startX = null, startY = 0;
+    list.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, { passive: true });
+    list.addEventListener('touchend', function (e) {
+      if (startX === null) return;
+      var t = e.changedTouches[0], dx = t.clientX - startX, dy = t.clientY - startY;
+      startX = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) goTo(current + (dx < 0 ? 1 : -1));
+    });
+
+    slider.querySelector('.works__nav').hidden = false;
+    works.classList.add('is-ready');
+    render();
+    requestAnimationFrame(function () { requestAnimationFrame(function () { works.classList.add('is-anim'); }); });
   }
 })();

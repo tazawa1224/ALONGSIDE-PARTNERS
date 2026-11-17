@@ -397,24 +397,24 @@ ul,ol{list-style:none}
   -webkit-mask-image:linear-gradient(0deg,#000 22%,transparent 48%);mask-image:linear-gradient(0deg,#000 22%,transparent 48%)}
 
 /* 見出し：左にコピー、右に手書きロゴ */
-.service__head,.works__head{
+.service__head{
   display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:24px;
   margin-bottom:clamp(44px,5.5vw,76px);
 }
-.service__eyebrow,.works__eyebrow,.message__eyebrow,.news__eyebrow{
+.service__eyebrow,.message__eyebrow,.news__eyebrow{
   display:flex;align-items:center;gap:18px;margin-bottom:clamp(20px,2.4vw,30px);
   font-size:.78rem;font-weight:600;letter-spacing:.32em;color:var(--teal-ink);
 }
-.service__eyebrow::before,.works__eyebrow::before,.message__eyebrow::before,.news__eyebrow::before{content:"";width:44px;height:1px;background:var(--teal)}
-.service__eyebrow span,.works__eyebrow span,.message__eyebrow span,.news__eyebrow span{margin-left:.6em;letter-spacing:.2em}
-.service__title,.works__title,.news__heading{
+.service__eyebrow::before,.message__eyebrow::before,.news__eyebrow::before{content:"";width:44px;height:1px;background:var(--teal)}
+.service__eyebrow span,.message__eyebrow span,.news__eyebrow span{margin-left:.6em;letter-spacing:.2em}
+.service__title,.news__heading{
   margin:0 0 clamp(22px,2.6vw,32px);
   font-family:var(--font-fv);font-weight:700;
   font-size:clamp(2rem,3.7vw,3.3rem);line-height:1.45;letter-spacing:.06em;color:var(--ink);
 }
-.service__title em,.works__title em{font-style:normal;color:var(--teal-strong)}
-.service__lead,.works__lead,.news__lead{font-family:var(--font-fv);font-weight:500;font-size:.98rem;line-height:2;letter-spacing:.06em;color:var(--muted)}
-.service__logo,.works__logo{width:clamp(260px,30vw,430px);height:auto;margin-right:clamp(0px,2vw,32px);opacity:.88}
+.service__title em{font-style:normal;color:var(--teal-strong)}
+.service__lead,.news__lead{font-family:var(--font-fv);font-weight:500;font-size:.98rem;line-height:2;letter-spacing:.06em;color:var(--muted)}
+.service__logo{width:clamp(260px,30vw,430px);height:auto;margin-right:clamp(0px,2vw,32px);opacity:.88}
 
 /* 3つの支援：白いガラスのカードと斜めの写真を左右交互に重ねる */
 /* 3つの支援：カードと写真で1本の帯をつくる。帯の上辺・下辺は右上がり、
@@ -483,6 +483,98 @@ ul,ol{list-style:none}
 .service__cta{display:flex;justify-content:center;margin-top:16px}   /* 見本どおり、最後の帯のすぐ下に置く */
 .service__btn{min-width:min(100%,420px);min-height:72px;font-size:1.06rem;letter-spacing:.08em;gap:2.4em}
 
+/* =====================================================================
+   PC：Figma（PC（自由編集用））で修正した CONCEPT / SERVICE の配置
+   SERVICE は幅1440pxのデザイン座標をそのまま使い、--u（=画面幅/1440）倍して置く。
+   帯・写真の形は Figma のパスを外接矩形に対する % の多角形にしたもの。
+   画面外に出る角の丸みは省いている。
+   ===================================================================== */
+@media (min-width:961px){
+  /* CONCEPT：左右の葉と斜めの光のラインを外し、ガラスを全幅に。中身を右へ寄せて少し下げる */
+  .concept{padding:calc(var(--cut) + clamp(28px,6.3vw,91px)) 0 clamp(80px,11.1vw,160px)}
+  .concept__bg .concept__leaves,.concept__edge{display:none}
+  .concept__glass{left:-9.4%;width:112.5%}
+  .concept .concept__inner{width:min(1271px,calc(100% - 11.8vw));position:relative;left:min(42.5px,2.95vw);gap:4px}
+
+  /* SERVICE */
+  .service{
+    --u:calc(100vw / 1440);
+    padding-top:0;padding-bottom:calc(var(--u) * 165);
+    background:linear-gradient(180deg,#F7FAFB 0,#E7F2F6 calc(var(--u) * 496),#E9F9FF 55%,#F5F9FB 100%);
+  }
+  .service__bg{display:none}
+  .service__head{position:absolute;left:calc(var(--u) * 70);top:0;z-index:10;display:block;margin:0}
+  .service__head > div{   /* 見出しの文章は画面から外し、読み上げ用に残す */
+    position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;
+  }
+  .service__logo{display:block;width:calc(var(--u) * 555);margin:0}
+
+  .service__list{position:relative;display:block;width:100vw;margin-left:calc(50% - 50vw);height:calc(var(--u) * 1874)}
+  .svc,.svc + .svc,.svc:nth-child(3){
+    position:absolute;left:0;width:100%;margin:0;display:block;pointer-events:none;
+    top:calc(var(--u) * var(--rt));height:calc(var(--u) * var(--rh));--z:1;
+  }
+  .svc__card,.svc--rev .svc__card{
+    position:absolute;left:calc(var(--u) * var(--cx));top:calc(var(--u) * var(--cy));z-index:var(--zc);
+    width:max-content;padding:0;pointer-events:auto;
+  }
+  .svc:hover .svc__card{transform:none}
+  .svc__plate{
+    inset:auto;left:calc(var(--u) * var(--bx));top:calc(var(--u) * var(--by));
+    width:calc(var(--u) * var(--bw));height:calc(var(--u) * var(--bh));filter:var(--bsh);
+  }
+  .svc__plate::before{clip-path:var(--band);background:var(--bbg);pointer-events:auto}
+  .svc__photo{
+    left:calc(var(--u) * var(--px));top:calc(var(--u) * var(--py));
+    width:calc(var(--u) * var(--pw));height:calc(var(--u) * var(--ph));z-index:var(--zp);filter:none;
+  }
+  .svc__clip{clip-path:var(--pclip);pointer-events:auto}
+  .svc__img{inset:auto;left:var(--il);top:var(--it);width:var(--iw);height:var(--ih);object-fit:fill}
+}
+
+/* 各行の数値（PCの配置と、PC/SP共通の写真の形・切り抜き・帯の色） */
+.svc:nth-child(1){
+    --rt:22;--rh:723;--cx:227;--cy:222;--zc:6;--zp:7;
+    --bx:-243;--by:-187;--bw:1481;--bh:651;
+    --band:polygon(0 15.21%,100% 0,100% 100%,0 77.04%);
+    --bbg:linear-gradient(142deg,#F1FBFF 18%,rgba(255,255,255,.7) 76%);
+    --bsh:drop-shadow(0 31px 100px rgba(0,0,0,.03));
+    --px:699;--py:0;--pw:903;--ph:722.5;
+    --pclip:polygon(0 12.87%,100% 0,98.09% 100%,6.42% 84.15%);
+    --il:-51.74%;--it:-2.42%;--iw:201.36%;--ih:114.02%;
+  }
+  .svc:nth-child(2){
+    --rt:624.5;--rh:732;--cx:797;--cy:216.5;--zc:4;--zp:5;
+    --bx:-974.9;--by:-216.5;--bw:1642.9;--bh:732;
+    --band:polygon(2.86% 17.44%,100% 0,100% 71.86%,2.86% 100%);
+    --bbg:linear-gradient(139deg,#F1F7F9 30%,rgba(255,255,255,.7) 89%);
+    --bsh:drop-shadow(0 22px 45px rgba(15,55,50,.01));
+    --px:-142;--py:64.5;--pw:864;--ph:658;
+    --pclip:polygon(4.8% 8.13%,81.25% 0,100% 84.42%,4.8% 100%);
+    --il:-32.82%;--it:-45.65%;--iw:219.35%;--ih:157.76%;
+  }
+  .svc:nth-child(3){
+    --rt:1202;--rh:672;--cx:335;--cy:224;--zc:2;--zp:3;
+    --bx:-511;--by:-224;--bw:1850;--bh:670;
+    --band:polygon(3.3% 0,95.94% 26.95%,100% 60%,88.38% 100%,7.79% 84.03%,0 40%);
+    --bbg:linear-gradient(164deg,#F0FAFF 24%,rgba(255,255,255,.7) 89%);
+    --bsh:drop-shadow(0 22px 80px rgba(15,55,50,.09));
+    --px:700.5;--py:109.5;--pw:762.5;--ph:610.7;
+    --pclip:polygon(26.62% 0,100% 8.92%,100% 92.03%,0 85.07%);
+    --il:-89.8%;--it:-11.69%;--iw:231.32%;--ih:164.23%;
+  }
+
+@media (min-width:961px){
+  .service__cta{margin-top:calc(var(--u) * 5)}   /* Figmaで詰めた位置（ボタンを41上げた） */
+  /* SERVICE 03：Figmaで帯の下端を詰め、角を丸めた形にした。写真も少し上・小さめに（PCのみ。曲線は点を細かく取って近似） */
+  /* 写真の上下の辺を帯（カードの形）の上下の辺にそろえ、はみ出しと帯ののぞきを無くす（PCのみ） */
+  .svc:nth-child(1){--pclip:polygon(0 11.94%,99.93% 3.58%,98.16% 96.62%,6.5% 85.07%)}
+  .svc:nth-child(2){--ph:664;--it:-45.24%;--ih:156.33%;--pclip:polygon(4.8% 9.16%,81.52% 1.16%,100% 83.93%,4.8% 99.94%)}
+  .svc:nth-child(3){--bh:626;--band:polygon(3.30% 0,71.35% 19.81%,95.94% 26.95%,96.29% 28.50%,97.13% 32.80%,98.20% 39.30%,99.21% 47.44%,99.88% 56.67%,99.93% 66.45%,99.09% 76.22%,97.06% 85.44%,93.59% 93.55%,88.38% 100%,7.79% 84.03%,6.24% 81.95%,4.67% 75.77%,3.18% 66.49%,1.87% 55.12%,0.84% 42.69%,0.19% 30.21%,0.01% 18.68%,0.40% 9.13%,1.47% 2.56%);--px:708;--py:96;--pw:762;--ph:566;--pclip:polygon(26.35% .85%,100% 10.6%,100% 93.76%,.1% 84.73%)}
+  .service__btn{min-width:478px;min-height:82px}
+
+}
+
 .section__cta{
   margin-top:clamp(40px,5vw,60px);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
   gap:18px;text-align:center;
@@ -504,50 +596,172 @@ ul,ol{list-style:none}
 .works__leaves{inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;
   -webkit-mask-image:linear-gradient(180deg,transparent,#000 14%);mask-image:linear-gradient(180deg,transparent,#000 14%,#000 82%,transparent)}   /* 上端で切れ目が出ないように */
 
-/* 事例カード：白いガラスの板に、斜めに切り抜いた写真を右端で重ねる */
-.works__list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,1.8vw,24px) clamp(20px,2.4vw,32px)}
-.work{
-  position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) 38%;align-items:center;
-}
-.work::before{   /* 板の右端は写真の下に隠し、写真の斜辺をカードの右端に見せる */
-  content:"";position:absolute;z-index:-1;inset:3% 26% 3% 0;border-radius:20px;
-  border:1px solid rgba(255,255,255,.9);
-  background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(255,255,255,.68));
-  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
-  box-shadow:0 18px 44px rgba(15,55,50,.07);
-}
-.work__body{padding:clamp(16px,1.8vw,22px) 18px clamp(16px,1.8vw,22px) clamp(22px,2.6vw,34px)}
-.work__img{width:100%;height:auto;filter:drop-shadow(0 14px 22px rgba(15,55,50,.12))}
-.work__head{display:flex;align-items:center;margin-bottom:10px}
-.work__no{
-  position:relative;flex:none;padding-right:1.24em;
-  font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-variant-numeric:lining-nums;
-  font-size:clamp(2rem,2.6vw,2.5rem);line-height:.9;letter-spacing:.02em;color:var(--teal);
-}
-.work__no::after{   /* 番号と見出しを分ける斜線（SERVICEと同じ） */
-  content:"";position:absolute;right:.62em;top:50%;   /* 番号とタイトルのちょうど中間に置き、中心を軸に傾ける */
-  width:1px;height:1.1em;background:var(--teal);transform:translate(50%,-50%) rotate(28deg);
-}
-.work__who{
-  white-space:nowrap;
-  font-family:var(--font-fv);font-weight:700;font-size:clamp(.98rem,1.3vw,1.16rem);letter-spacing:.04em;color:var(--ink);
-}
-.work__what{
-  font-family:var(--font-fv);font-weight:500;font-size:clamp(.8rem,.95vw,.86rem);line-height:1.8;letter-spacing:.04em;
-  color:var(--muted);word-break:auto-phrase;text-wrap:pretty;
-}
+/* 背景：斜めに重なる大きなガラス面と、右下のティールの面 */
+.works__plane{position:absolute;inset:0;display:block}
+.works__plane--a{background:linear-gradient(160deg,rgba(255,255,255,.6),rgba(255,255,255,.14));clip-path:polygon(0 58%,100% 12%,100% 50%,0 95%)}
+.works__plane--b{background:linear-gradient(200deg,rgba(255,255,255,.7),rgba(255,255,255,0) 80%);clip-path:polygon(31% 38%,46% 0,68% 0,44% 58%)}
+.works__plane--c{background:linear-gradient(100deg,#0B8676 0%,#1E9C88 55%,#9AD4C7 100%);clip-path:polygon(58% 100%,100% 85%,100% 100%)}
 
-/* 01：全幅の大きなカード。板も写真と同じ傾きの平行四辺形にする */
-.work--lead{grid-column:1 / -1;grid-template-columns:minmax(0,1fr) 56%;align-items:end;margin-bottom:clamp(4px,1vw,12px)}
-.work--lead::before{
-  inset:30% 26% 3% 2%;border-radius:24px;
-  transform:skewX(-12deg);transform-origin:left bottom;
+/* 見出し：手書きロゴ、「事例紹介」、短い線、説明文を左に縦積み */
+.works.section{padding:clamp(56px,10vw,96px) 0 clamp(72px,12vw,120px)}
+.works__stage{position:relative;width:min(640px,calc(100% - var(--gutter) * 2));margin-inline:auto}
+.works__head{margin:0 0 32px}
+.works__logo{display:block;width:min(80vw,420px);height:auto;margin-left:-3%}
+.works__title{
+  margin:2px 0 0;font-family:var(--font-fv);font-weight:700;
+  font-size:clamp(2rem,8vw,2.7rem);line-height:1.3;letter-spacing:.14em;color:var(--ink-soft);
 }
-.work--lead .work__body{padding:0 0 clamp(26px,3vw,40px) clamp(56px,6vw,84px)}
-.work--lead .work__head{margin-bottom:16px}
-.work--lead .work__no{font-size:clamp(2.6rem,3.6vw,3.4rem)}
-.work--lead .work__who{font-size:clamp(1.3rem,1.9vw,1.6rem)}
-.work--lead .work__what{font-size:clamp(.9rem,1.1vw,1rem);color:var(--ink-soft)}
+.works__title::after{content:"";display:block;width:44px;height:2px;margin-top:22px;background:var(--teal)}
+.works__lead{margin-top:20px;font-family:var(--font-fv);font-weight:500;font-size:.95rem;line-height:2.05;letter-spacing:.14em;color:#3B434A}
+
+/* 事例カード（スマホと、JSが動かない時の縦並び）：斜めの白い板に、写真→本文の順 */
+.works__list{display:grid;gap:28px;margin:0;padding:0;list-style:none}
+.work{filter:drop-shadow(0 22px 34px rgba(15,55,50,.10))}
+.work__card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(170deg,rgba(255,255,255,.97),rgba(255,255,255,.84));
+  clip-path:polygon(7% 0,100% 0,93% 100%,0 100%);
+}
+.work__media{position:relative;aspect-ratio:1.5 / 1;-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent);mask-image:linear-gradient(180deg,#000 72%,transparent)}
+.work__img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover}
+.work__media,.work__body{transition:opacity .22s var(--ease)}
+.work__body{padding:4px 11% 32px}
+.work__head{display:flex;align-items:center;margin:0}
+.work__no{
+  position:relative;flex:none;padding-right:1.05em;
+  font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-variant-numeric:lining-nums;
+  font-size:2.6rem;line-height:1;letter-spacing:.02em;color:var(--teal-ink);
+}
+.work__no::after{content:"";position:absolute;right:.42em;top:50%;width:1px;height:1.15em;background:var(--teal);transform:translate(50%,-50%) rotate(12.4deg)}   /* カードの斜辺と同じ傾き */
+.work__who{font-family:var(--font-fv);font-weight:700;font-size:1.2rem;line-height:1.5;letter-spacing:.07em;color:var(--ink-soft)}
+.work__desc{margin-top:14px;font-family:var(--font-fv);font-weight:500;font-size:.9rem;line-height:2;letter-spacing:.06em;color:#454D55;word-break:auto-phrase}
+.work__tags{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.work__tags li{padding:.36em 1.05em;border-radius:999px;background:rgba(223,243,239,.92);font-family:var(--font-fv);font-weight:500;font-size:.78rem;letter-spacing:.06em;color:#2F5F57}
+.work__more{
+  display:inline-flex;align-items:center;gap:14px;min-height:44px;margin-top:18px;
+  font-family:var(--font-fv);font-weight:700;font-size:.95rem;letter-spacing:.14em;color:var(--ink-soft);
+  text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;
+}
+.work__more-icon{flex:none;display:grid;place-items:center;width:42px;height:32px;border-radius:4px;background:linear-gradient(160deg,#0E8E7C,var(--teal-strong));color:#fff;transform:skewX(-12.4deg);box-shadow:0 8px 18px rgba(11,134,118,.24);transition:transform .25s var(--ease)}
+.work__more-icon svg{transform:skewX(12.4deg)}
+.work__more-icon svg{width:45%;height:45%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.work__more:hover .work__more-icon,.work__more:focus-visible .work__more-icon{transform:translateX(3px) skewX(-12.4deg)}
+
+/* 送り：カードと同じ傾き（約12.4°）のガラス板。前へ＝白いガラス、次へ＝ティールのガラス。ドットも同じ傾きの短い板 */
+.works{--lean:-12.4deg}
+.works__nav{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:30px}
+.works__nav[hidden]{display:none}
+.works__arrow{
+  position:relative;isolation:isolate;flex:none;display:grid;place-items:center;width:72px;height:50px;padding:0;
+  border:0;background:none;cursor:pointer;color:var(--teal-ink);
+}
+.works__arrow::before{
+  content:"";position:absolute;inset:0;z-index:-1;border-radius:6px;transform:skewX(var(--lean));
+  border:1px solid rgba(255,255,255,.95);
+  background:linear-gradient(160deg,rgba(255,255,255,.94),rgba(255,255,255,.6));
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  box-shadow:0 14px 30px rgba(15,55,50,.10),inset 0 1px 0 #fff;
+  transition:box-shadow .3s var(--ease),transform .3s var(--ease);
+}
+.works__arrow--next{color:#fff}
+.works__arrow--next::before{
+  border-color:rgba(255,255,255,.35);
+  background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,0) 42%),linear-gradient(160deg,rgba(8,113,96,.9),rgba(6,95,82,.96));
+  box-shadow:0 14px 30px rgba(11,134,118,.28),inset 0 1px 0 rgba(255,255,255,.45);
+}
+.works__arrow svg{width:30px;height:12px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s var(--ease)}
+.works__arrow:hover::before{box-shadow:0 18px 36px rgba(15,55,50,.14),inset 0 1px 0 #fff}
+.works__arrow--next:hover::before{box-shadow:0 18px 36px rgba(11,134,118,.36),inset 0 1px 0 rgba(255,255,255,.5)}
+.works__arrow--prev:hover svg{transform:translateX(-4px)}
+.works__arrow--next:hover svg{transform:translateX(4px)}
+.works__arrow:focus-visible,.works__dot:focus-visible,.work__more:focus-visible{outline:2px solid var(--teal-ink);outline-offset:3px}
+.works__dots{display:flex;align-items:center}
+.works__dot{display:grid;place-items:center;width:26px;height:36px;padding:0;border:0;background:none;cursor:pointer}
+.works__dot::before{content:"";width:14px;height:4px;border-radius:1px;background:#CFDADD;transform:skewX(var(--lean));transition:background .3s var(--ease),width .3s var(--ease)}
+.works__dot:hover::before{background:#B5C8CD}
+.works__dot[aria-current="true"]{width:40px}
+.works__dot[aria-current="true"]::before{width:30px;background:var(--teal-strong)}
+
+/* スマホ・タブレット：表示中の1枚だけを出し、切り替え時に横から差し込む */
+@media (max-width:1099px){
+  .work__img{inset:-9%;width:118%;height:118%}   /* 素材の斜めに切れた透明な角を枠の外へ */
+  .works.is-ready .work:not([data-pos="0"]){display:none}
+  .works.is-ready .work[data-pos="0"]{animation:workIn .5s var(--ease)}
+  .works.is-switching .work__media,.works.is-switching .work__body{opacity:0}
+}
+@keyframes workIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+
+/* PC：見本の座標（幅1672）をそのまま比率で置く。中央の大きな板の右奥に、次の3枚を小さく重ねる */
+@media (min-width:1100px){
+  .works.section.is-ready{--u:calc(100vw / 1672);padding:0}
+  .works.is-ready .works__stage{width:auto;height:calc(var(--u) * 1194);margin:0}
+  .works.is-ready .works__plane--a,.works.is-ready .works__plane--b{display:none}   /* Figmaで外した2枚の面 */
+  .works.is-ready .works__plane--c{clip-path:polygon(58% 100%,100% calc(100% - var(--u) * 145),100% 100%)}
+  .works.is-ready .works__light{top:calc(var(--u) * -41);left:-4%;width:108%;height:calc(var(--u) * 1837)}   /* Figmaで縦に伸ばした光 */
+  .works.is-ready .works__head{position:absolute;left:calc(var(--u) * 88);top:calc(var(--u) * 182);z-index:2;margin:0;display:grid;grid-template-columns:auto auto;align-items:center;justify-content:start}   /* 見出しと説明文を縦線をはさんで横に並べる */
+  .works.is-ready .works__logo{grid-column:1 / -1;width:calc(var(--u) * 485);margin:0}
+  .works.is-ready .works__title{position:relative;margin:calc(var(--u) * -4) 0 0 calc(var(--u) * 15);padding-right:calc(var(--u) * 14);font-size:calc(var(--u) * 58);line-height:1.2;letter-spacing:.16em}
+  .works.is-ready .works__title::after{position:absolute;right:0;top:50%;width:max(2px,calc(var(--u) * 3.5));height:calc(var(--u) * 46);margin:0;transform:translateY(-50%)}
+  .works.is-ready .works__lead{margin:calc(var(--u) * -4) 0 0 calc(var(--u) * 21);font-size:max(13px,calc(var(--u) * 17));letter-spacing:.17em}
+
+  .works.is-ready .works__slider{position:absolute;inset:0;pointer-events:none}
+  .works.is-ready .works__list{display:block}
+  .works.is-ready .work{
+    position:absolute;pointer-events:auto;cursor:pointer;
+    left:calc(var(--u) * var(--x));top:calc(var(--u) * var(--y));width:calc(var(--u) * var(--w));height:calc(var(--u) * var(--h));
+    font-size:calc(var(--u) * var(--f,17));
+    filter:drop-shadow(0 calc(var(--u) * 30) calc(var(--u) * 40) rgba(15,55,50,.10));
+  }
+  .works.is-ready .work__card{position:absolute;inset:0;clip-path:var(--clip)}
+  .works.is-anim .work{transition:left .7s var(--ease),top .7s var(--ease),width .7s var(--ease),height .7s var(--ease),opacity .5s var(--ease)}   /* 最初の配置が済んでから動きをつける */
+  .works.is-anim .work__card{transition:clip-path .7s var(--ease)}
+  .works.is-switching .work__media,.works.is-switching .work__body{opacity:0}
+
+  /* 置き場所：0=中央、1〜3=右奥、prev=左へ抜ける、hidden=右奥から入ってくる */
+  .works.is-ready .work[data-pos="0"]{--x:250;--y:366;--w:952;--h:560;--clip:polygon(11.2% 13.6%,100% 0,88.8% 86.4%,0 100%);z-index:6;cursor:default}
+  .works.is-ready .work[data-pos="1"]{--x:1080;--y:446;--w:300;--h:400;--f:18;--pt:79;--pl:92;--clip:polygon(27.9% 4.9%,100% 0,72.1% 95.1%,0 100%);z-index:5}
+  .works.is-ready .work[data-pos="2"]{--x:1250;--y:506;--w:240;--h:310;--f:13;--pt:59;--pl:108;--clip:polygon(27% 5.1%,100% 0,73% 94.9%,0 100%);z-index:4;opacity:.92}
+  .works.is-ready .work[data-pos="3"]{--x:1398;--y:540;--w:172;--h:240;--f:10.5;--pt:50;--pl:76;--clip:polygon(29.1% 4.7%,100% 0,70.9% 95.3%,0 100%);z-index:3;opacity:.8}
+  .works.is-ready .work[data-pos="prev"]{--x:-220;--y:366;--w:952;--h:560;--clip:polygon(11.2% 13.6%,100% 0,88.8% 86.4%,0 100%);z-index:7;opacity:0;pointer-events:none}
+  .works.is-ready .work[data-pos="hidden"]{--x:1520;--y:570;--w:150;--h:195;--f:9;--pt:40;--pl:60;--clip:polygon(27.2% 5%,100% 0,72.8% 95%,0 100%);z-index:2;opacity:0;pointer-events:none}
+
+  /* 中央の板：左に番号・見出し・説明・タグ・リンク（板の斜辺に沿って行頭をずらす）、右に写真 */
+  .works.is-ready .work[data-pos="0"] .work__media{position:absolute;top:0;right:0;bottom:0;width:66%;aspect-ratio:auto;
+    -webkit-mask-image:linear-gradient(102deg,transparent 30%,#000 54%);mask-image:linear-gradient(102deg,transparent 30%,#000 54%)}
+  .works.is-ready .work[data-pos="0"] .work__body{position:absolute;left:0;top:0;width:62%;padding:calc(var(--u) * 146) 0 0}
+  .works.is-ready .work[data-pos="0"] .work__head{margin-left:calc(var(--u) * 192)}
+  .works.is-ready .work[data-pos="0"] .work__no{padding-right:calc(var(--u) * 86);font-size:calc(var(--u) * 62)}
+  .works.is-ready .work[data-pos="0"] .work__no::after{right:calc(var(--u) * 40);height:calc(var(--u) * 74);width:1.5px;transform:translate(50%,-50%) rotate(12.4deg)}
+  .works.is-ready .work[data-pos="0"] .work__who{font-size:max(20px,calc(var(--u) * 36));line-height:1.45;letter-spacing:.08em;white-space:nowrap}
+  .works.is-ready .work[data-pos="0"] .work__desc{max-width:calc(var(--u) * 420);margin:calc(var(--u) * 28) 0 0 calc(var(--u) * 166);font-size:max(12px,calc(var(--u) * 17));letter-spacing:.1em}
+  .works.is-ready .work[data-pos="0"] .work__tags{flex-wrap:nowrap;gap:calc(var(--u) * 14);margin:calc(var(--u) * 24) 0 0 calc(var(--u) * 148)}
+  .works.is-ready .work[data-pos="0"] .work__tags li{flex:none;font-size:max(11px,calc(var(--u) * 14));padding:.4em 1.1em}
+  .works.is-ready .work[data-pos="0"] .work__more{gap:calc(var(--u) * 20);margin:calc(var(--u) * 30) 0 0 calc(var(--u) * 130);font-size:max(12px,calc(var(--u) * 17))}
+  .works.is-ready .work[data-pos="0"] .work__more-icon{width:max(38px,calc(var(--u) * 46));height:max(28px,calc(var(--u) * 34))}
+
+  /* 右奥の板：番号と見出しだけを上に、写真を下に */
+  .works.is-ready .work:not([data-pos="0"]) .work__media{position:absolute;left:0;right:0;bottom:0;height:44%;aspect-ratio:auto;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 38%);mask-image:linear-gradient(180deg,transparent,#000 38%)}
+  .works.is-ready .work:not([data-pos="0"]) .work__body{position:absolute;inset:0;padding:calc(var(--u) * var(--pt,60)) 0 0 calc(var(--u) * var(--pl,60))}
+  .works.is-ready .work:not([data-pos="0"]) .work__card{background:linear-gradient(170deg,#fff,#F7FBFC)}
+  .works.is-ready .work:not([data-pos="0"]) .work__head{flex-direction:column;align-items:flex-start}
+  .works.is-ready .work:not([data-pos="0"]) .work__no{padding-right:.9em;font-size:1.7em}
+  .works.is-ready .work:not([data-pos="0"]) .work__no::after{right:.3em;height:.95em}
+  .works.is-ready .work:not([data-pos="0"]) .work__who{margin-top:.55em;font-size:1em;line-height:1.65;letter-spacing:.02em}
+  .works.is-ready .work:not([data-pos="0"]) :is(.work__desc,.work__tags,.work__more){display:none}
+
+
+  .works.is-ready .works__nav{display:block;margin:0}
+  .works.is-ready .works__arrow{position:absolute;z-index:9;top:calc(var(--u) * 636);width:max(64px,calc(var(--u) * 84));height:max(44px,calc(var(--u) * 58));pointer-events:auto}
+  .works.is-ready .works__arrow--prev{left:calc(var(--u) * 96)}
+  .works.is-ready .works__arrow--next{left:calc(var(--u) * 1572)}
+  .works.is-ready .works__dots{position:absolute;left:0;right:0;top:calc(var(--u) * 938);justify-content:center;pointer-events:auto}
+}
+/* PC幅が狭いとき：説明文の最小文字サイズで行が伸びる分、大きな板の左端を右へ寄せて重ならないようにする */
+@media (min-width:1100px) and (max-width:1439px){
+  .works.is-ready .work[data-pos="0"]{--x:290;--w:912;--clip:polygon(11.8% 12.9%,100% 0,88.2% 87.1%,0 100%)}
+  .works.is-ready .work[data-pos="prev"]{--w:912;--clip:polygon(11.8% 12.9%,100% 0,88.2% 87.1%,0 100%)}
+}
 
 /* =====================================================================
    MESSAGE
@@ -618,7 +832,7 @@ ul,ol{list-style:none}
 .news__pick{
   --sk:-7deg;
   position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden;
-  margin-inline:clamp(28px,3vw,44px);border-radius:28px;
+  margin-inline:clamp(28px,3vw,44px);border-radius:0;
   border:1px solid rgba(255,255,255,.9);
   background:linear-gradient(160deg,rgba(255,255,255,.66),rgba(255,255,255,.88) 55%);
   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
@@ -655,7 +869,7 @@ ul,ol{list-style:none}
 .news__list{display:grid;grid-auto-rows:1fr;gap:clamp(12px,1.2vw,16px);margin:0;list-style:none;min-width:0}
 .news__item{
   display:grid;grid-template-columns:clamp(112px,9.4vw,136px) minmax(0,1fr);align-items:center;
-  padding:clamp(16px,1.6vw,22px) clamp(24px,2.6vw,36px);border-radius:20px;
+  padding:clamp(16px,1.6vw,22px) clamp(24px,2.6vw,36px);border-radius:0;
   border:1px solid rgba(255,255,255,.9);
   background:linear-gradient(135deg,rgba(255,255,255,.86),rgba(255,255,255,.62));
   -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
@@ -781,8 +995,8 @@ ul,ol{list-style:none}
   .cstep__title{font-size:1.02rem;white-space:nowrap}
   .concept__lead br{display:none}
   .concept__lead{word-break:auto-phrase}
-  .service__head,.works__head{grid-template-columns:minmax(0,1fr)}
-  .service__logo,.works__logo{grid-row:1;justify-self:end;width:min(62vw,280px);margin:0 0 -12px}
+  .service__head{grid-template-columns:minmax(0,1fr)}
+  .service__logo{grid-row:1;justify-self:end;width:min(62vw,280px);margin:0 0 -12px}
   .service__lead br{display:none}
   .service__lead,.svc__desc{word-break:auto-phrase}
   .svc{flex-direction:column;align-items:stretch}
@@ -798,22 +1012,11 @@ ul,ol{list-style:none}
   .svc__desc br{display:none}
   .svc__idx{font-size:2.4rem}
   .svc__title{font-size:1.1rem;letter-spacing:.03em;white-space:nowrap}
-  .service__logo,.works__logo{margin-top:-24px}
+  .service__logo{margin-top:-24px}
   .svc__points li::before{width:28px;height:28px;background-size:13px}
-  .works__list{grid-template-columns:minmax(0,1fr);gap:28px}
-  .work,.work--lead{display:flex;flex-direction:column;align-items:stretch;margin:0}
-  .work__img{position:relative;z-index:1;order:-1;width:86%;margin:0 -3% -26px auto}
-  .work::before{display:none}
-  .work__body,.work--lead .work__body{
-    padding:40px 22px 22px;border-radius:20px;border:1px solid rgba(255,255,255,.9);
-    background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(255,255,255,.72));box-shadow:0 14px 34px rgba(15,55,50,.07);
-  }
-  .work--lead .work__img{width:96%}
-  .work__who{white-space:normal;word-break:auto-phrase}
-  .work__no,.work--lead .work__no{font-size:2.1rem}
   .message{padding-bottom:64px}
   .news__grid{grid-template-columns:minmax(0,1fr)}
-  .news__pick{--sk:0deg;margin-inline:0;border-radius:22px}
+  .news__pick{--sk:0deg;margin-inline:0;border-radius:0}
   .news__pick-img{transform:none}
   .news__pick-body{padding:14px 22px 26px}
   .news__pick-arrow{top:10px;right:20px;bottom:auto;width:44px;height:44px}   /* 狭い画面では右上に置き、文字幅を確保する */
@@ -1055,9 +1258,55 @@ ul,ol{list-style:none}
 }
 
 /* =====================================================================
+   SP：PC（Figma修正版）のデザインに合わせた CONCEPT / SERVICE
+   写真は PC と同じ形・切り抜きのまま縮小し、帯は全幅の斜めにして縦に重ねる。
+   ===================================================================== */
+@media (max-width:960px){
+  /* CONCEPT：葉と光のラインを外し、ガラスを全面に */
+  .concept__bg .concept__leaves,.concept__edge{display:none}
+  .concept__bg .concept__glass{left:-9.4%;width:112.5%;height:100%;object-fit:cover}
+
+  /* SERVICE */
+  .service{
+    padding-top:clamp(24px,6vw,48px);
+    background:linear-gradient(180deg,#F7FAFB 0,#E7F2F6 30%,#E9F9FF 60%,#F5F9FB 100%);
+  }
+  .service__bg{display:none}
+  .service__head{display:block;margin:0 0 -6vw}
+  .service__head > div{   /* 見出しの文章は画面から外し、読み上げ用に残す */
+    position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;
+  }
+  .service__head .service__logo{display:block;position:relative;z-index:5;width:min(86vw,560px);margin:0 0 0 -2vw}
+
+  .service__list{width:100vw;margin-left:calc(50% - 50vw)}
+  .svc{position:relative;--pov:22vw}
+  .svc:nth-child(1){z-index:3;--sl:21.3vw;--sband:polygon(0 11vw,100% 0,100% 100%,0 calc(100% - 9vw))}
+  .svc:nth-child(2){z-index:2;--sl:-15.7vw;--sband:polygon(0 9vw,100% 0,100% calc(100% - 10vw),0 100%)}
+  .svc:nth-child(3){z-index:1;--sl:6.9vw;--sband:polygon(0 0,100% 10vw,100% 100%,0 calc(100% - 6vw))}
+  .svc + .svc,.svc:nth-child(3){margin-top:-10vw}
+  .svc__photo,.svc--rev .svc__photo{
+    position:relative;order:-1;z-index:2;width:var(--sw,96vw);aspect-ratio:var(--pw) / var(--ph);
+    margin:0 0 calc(var(--pov) * -1) var(--sl);filter:none;
+  }
+  .svc__clip{position:absolute;inset:0;overflow:hidden;background:#E6F0F4;clip-path:var(--pclip)}
+  .svc__img{position:absolute;inset:auto;left:var(--il);top:var(--it);width:var(--iw);height:var(--ih);max-width:none;object-fit:fill;transform:none}
+  .svc__card,.svc--rev .svc__card{padding:calc(var(--pov) + 28px) 24px 17vw}
+  .svc__plate{filter:drop-shadow(0 16px 32px rgba(15,55,50,.08))}   /* 画面が狭く帯の色差だけでは境目が見えにくいので、PCより少し濃い影 */
+  .svc__plate::before{clip-path:var(--sband);background:var(--bbg)}
+}
+@media (min-width:601px) and (max-width:960px){   /* タブレット：写真が大きくなりすぎないよう幅を抑える（画面外に出す割合はPCと同じ） */
+  .svc{--sw:74vw;--pov:17vw}
+  .svc:nth-child(1){--sl:39.3vw}
+  .svc:nth-child(2){--sl:-12.1vw}
+  .svc:nth-child(3){--sl:28.2vw}
+  .svc__card,.svc--rev .svc__card{padding-inline:var(--gutter)}
+}
+
+/* =====================================================================
    prefers-reduced-motion : 線は完成状態で静的表示、意味は保つ
    ===================================================================== */
 @media (prefers-reduced-motion:reduce){
+  .works.is-anim .work,.works.is-anim .work__card,.works .work__media,.works .work__body{transition:none}
   html{scroll-behavior:auto}
   *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
   .check-path{stroke-dashoffset:0 !important}

@@ -7,7 +7,7 @@
 <meta name="description" content="ALONGSIDE PARTNERS｜金融コンサルティング・デジタル/キャリア支援・ビジネス支援。答えを押し付けず、現状を一緒に整理し、あなたらしい選択肢へ伴走します。無料相談受付中。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="styles.css">
 <!-- FV の読み込みアニメーション準備（JS が動く & 動きを減らす設定でない時だけ。初回描画前に付ける） -->
 <script>if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('fv-anim');</script>
@@ -212,68 +212,103 @@
     <div class="works__bg" aria-hidden="true">
       <img class="works__light" src="img/works/works-light.webp" alt="" width="1400" height="933" loading="lazy">
       <img class="works__leaves" src="img/works/works-leaves.webp" alt="" width="1400" height="1050" loading="lazy">
+      <span class="works__plane works__plane--a"></span>
+      <span class="works__plane works__plane--b"></span>
+      <span class="works__plane works__plane--c"></span>
     </div>
-    <div class="container">
+    <div class="works__stage">
       <header class="works__head" data-reveal>
-        <div>
-          <p class="works__eyebrow">WORKS<span>/ 相談事例</span></p>
-          <h2 class="works__title">あなたに近い誰かも、<br><em>ここから進みはじめた。</em></h2>
-          <p class="works__lead">「誰が × 何を」で見る、7つの実例。</p>
-        </div>
         <img class="works__logo" src="img/works/works-logo.webp" alt="WORKS — Case studies &amp; stories" width="900" height="236" loading="lazy">
+        <h2 class="works__title">事例紹介</h2>
+        <p class="works__lead">これまでにご支援した<br>主な事例をご紹介します。</p>
       </header>
 
-      <ul class="works__list">
-        <li class="work work--lead" data-reveal>
-          <div class="work__body">
-            <p class="work__head"><span class="work__no">01</span><span class="work__who">新婚世帯の家計見直し</span></p>
-            <p class="work__what">固定費整理 / 貯蓄習慣の構築 / 住まい購入に向けた準備</p>
-          </div>
-          <img class="work__img" src="img/works/works-01.webp" alt="ノートパソコンをのぞき込みながら笑顔で話す夫婦" width="1500" height="476" loading="lazy">
-        </li>
-        <li class="work" data-reveal>
-          <div class="work__body">
-            <p class="work__head"><span class="work__no">02</span><span class="work__who">子育て世帯の教育資金相談</span></p>
-            <p class="work__what">教育費と生活費の可視化 / 将来不安の軽減 / 積立計画の設計</p>
-          </div>
-          <img class="work__img" src="img/works/works-02.webp" alt="空を見上げて笑う母親と娘" width="900" height="429" loading="lazy">
-        </li>
-        <li class="work" data-reveal>
-          <div class="work__body">
-            <p class="work__head"><span class="work__no">03</span><span class="work__who">転職前のキャリア整理</span></p>
-            <p class="work__what">強みの棚卸し / 働き方の優先順位整理 / 自分らしさを軸にした転職活動支援</p>
-          </div>
-          <img class="work__img" src="img/works/works-03.webp" alt="あごに手を当てて考えごとをする男性" width="900" height="422" loading="lazy">
-        </li>
-        <li class="work" data-reveal>
-          <div class="work__body">
-            <p class="work__head"><span class="work__no">04</span><span class="work__who">副業スタートの伴走支援</span></p>
-            <p class="work__what">情報発信の方向性整理 / 学習計画の設計 / 未経験から初受注までの支援</p>
-          </div>
-          <img class="work__img" src="img/works/works-04.webp" alt="観葉植物とコーヒーが置かれた机の上のノートパソコン" width="900" height="417" loading="lazy">
-        </li>
-        <li class="work" data-reveal>
-          <div class="work__body">
-            <p class="work__head"><span class="work__no">05</span><span class="work__who">個人事業主の売上改善</span></p>
-            <p class="work__what">提案導線の見直し / サービス設計改善 / 継続相談が増える仕組みづくり</p>
-          </div>
-          <img class="work__img" src="img/works/works-05.webp" alt="売上グラフが表示されたノートパソコン" width="900" height="443" loading="lazy">
-        </li>
-        <li class="work" data-reveal>
-          <div class="work__body">
-            <p class="work__head"><span class="work__no">06</span><span class="work__who">ライフイベント前の将来設計</span></p>
-            <p class="work__what">結婚・出産・仕事の両立を見据えた相談 / 安心して選択できる行動計画の明確化</p>
-          </div>
-          <img class="work__img" src="img/works/works-06.webp" alt="ノートにライフプランの図を書き込む手元" width="900" height="387" loading="lazy">
-        </li>
-        <li class="work" data-reveal>
-          <div class="work__body">
-            <p class="work__head"><span class="work__no">07</span><span class="work__who">小規模法人の立ち上げ伴走</span></p>
-            <p class="work__what">事業方向性の整理 / 初期導線設計 / スタート時の判断負担軽減</p>
-          </div>
-          <img class="work__img" src="img/works/works-07.webp" alt="向かい合って笑顔で話すスーツの男性" width="900" height="402" loading="lazy">
-        </li>
-      </ul>
+      <div class="works__slider" aria-roledescription="カルーセル" aria-label="相談事例">
+        <ul class="works__list" id="worksList">
+          <li class="work" aria-roledescription="スライド" aria-label="1 / 7">
+            <div class="work__card">
+              <div class="work__media"><img class="work__img" src="img/works/works-01.webp" alt="ノートパソコンをのぞき込みながら笑顔で話す夫婦" width="1500" height="476" loading="lazy"></div>
+              <div class="work__body">
+                <h3 class="work__head"><span class="work__no">01</span><span class="work__who">新婚世帯の<br>家計見直し</span></h3>
+                <p class="work__desc">固定費の整理と貯蓄習慣の構築により、住まい購入に向けた家計の土台を整えた事例です。</p>
+                <ul class="work__tags"><li>固定費整理</li><li>貯蓄習慣</li><li>住まい購入準備</li></ul>
+                <a class="work__more" href="#contact"><span class="work__more-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>詳しく見る</a>
+              </div>
+            </div>
+          </li>
+          <li class="work" aria-roledescription="スライド" aria-label="2 / 7">
+            <div class="work__card">
+              <div class="work__media"><img class="work__img" src="img/works/works-02.webp" alt="空を見上げて笑う母親と娘" width="900" height="429" loading="lazy"></div>
+              <div class="work__body">
+                <h3 class="work__head"><span class="work__no">02</span><span class="work__who">子育て世帯の<br>教育資金相談</span></h3>
+                <p class="work__desc">教育費と生活費を見える化し、将来への不安を減らす積立計画を設計した事例です。</p>
+                <ul class="work__tags"><li>教育費の可視化</li><li>不安の軽減</li><li>積立計画</li></ul>
+                <a class="work__more" href="#contact"><span class="work__more-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>詳しく見る</a>
+              </div>
+            </div>
+          </li>
+          <li class="work" aria-roledescription="スライド" aria-label="3 / 7">
+            <div class="work__card">
+              <div class="work__media"><img class="work__img" src="img/works/works-03.webp" alt="あごに手を当てて考えごとをする男性" width="900" height="422" loading="lazy"></div>
+              <div class="work__body">
+                <h3 class="work__head"><span class="work__no">03</span><span class="work__who">転職前の<br>キャリア整理</span></h3>
+                <p class="work__desc">強みの棚卸しと働き方の優先順位整理から、自分らしさを軸にした転職活動を支えた事例です。</p>
+                <ul class="work__tags"><li>強みの棚卸し</li><li>優先順位整理</li><li>転職活動支援</li></ul>
+                <a class="work__more" href="#contact"><span class="work__more-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>詳しく見る</a>
+              </div>
+            </div>
+          </li>
+          <li class="work" aria-roledescription="スライド" aria-label="4 / 7">
+            <div class="work__card">
+              <div class="work__media"><img class="work__img" src="img/works/works-04.webp" alt="観葉植物とコーヒーが置かれた机の上のノートパソコン" width="900" height="417" loading="lazy"></div>
+              <div class="work__body">
+                <h3 class="work__head"><span class="work__no">04</span><span class="work__who">副業スタートの<br>伴走支援</span></h3>
+                <p class="work__desc">情報発信の方向性と学習計画を整え、未経験から初受注までを伴走した事例です。</p>
+                <ul class="work__tags"><li>発信の方向性</li><li>学習計画</li><li>初受注まで</li></ul>
+                <a class="work__more" href="#contact"><span class="work__more-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>詳しく見る</a>
+              </div>
+            </div>
+          </li>
+          <li class="work" aria-roledescription="スライド" aria-label="5 / 7">
+            <div class="work__card">
+              <div class="work__media"><img class="work__img" src="img/works/works-05.webp" alt="売上グラフが表示されたノートパソコン" width="900" height="443" loading="lazy"></div>
+              <div class="work__body">
+                <h3 class="work__head"><span class="work__no">05</span><span class="work__who">個人事業主の<br>売上改善</span></h3>
+                <p class="work__desc">提案導線とサービス設計を見直し、継続相談が増える仕組みをつくった事例です。</p>
+                <ul class="work__tags"><li>提案導線</li><li>サービス設計</li><li>継続の仕組み</li></ul>
+                <a class="work__more" href="#contact"><span class="work__more-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>詳しく見る</a>
+              </div>
+            </div>
+          </li>
+          <li class="work" aria-roledescription="スライド" aria-label="6 / 7">
+            <div class="work__card">
+              <div class="work__media"><img class="work__img" src="img/works/works-06.webp" alt="ノートにライフプランの図を書き込む手元" width="900" height="387" loading="lazy"></div>
+              <div class="work__body">
+                <h3 class="work__head"><span class="work__no">06</span><span class="work__who">ライフイベント前の<br>将来設計</span></h3>
+                <p class="work__desc">結婚・出産・仕事の両立を見据え、安心して選べる行動計画を明確にした事例です。</p>
+                <ul class="work__tags"><li>ライフイベント</li><li>両立の設計</li><li>行動計画</li></ul>
+                <a class="work__more" href="#contact"><span class="work__more-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>詳しく見る</a>
+              </div>
+            </div>
+          </li>
+          <li class="work" aria-roledescription="スライド" aria-label="7 / 7">
+            <div class="work__card">
+              <div class="work__media"><img class="work__img" src="img/works/works-07.webp" alt="向かい合って笑顔で話すスーツの男性" width="900" height="402" loading="lazy"></div>
+              <div class="work__body">
+                <h3 class="work__head"><span class="work__no">07</span><span class="work__who">小規模法人の<br>立ち上げ伴走</span></h3>
+                <p class="work__desc">事業の方向性と初期の導線を整理し、立ち上げ時の判断負担を軽くした事例です。</p>
+                <ul class="work__tags"><li>事業方向性</li><li>初期導線</li><li>判断負担の軽減</li></ul>
+                <a class="work__more" href="#contact"><span class="work__more-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>詳しく見る</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="works__nav" hidden>
+          <button class="works__arrow works__arrow--prev" type="button" aria-controls="worksList" aria-label="前の事例"><svg viewBox="0 0 32 12" aria-hidden="true"><path d="M31 6H1.5M7 .8 1.5 6 7 11.2"/></svg></button>
+          <div class="works__dots"></div>
+          <button class="works__arrow works__arrow--next" type="button" aria-controls="worksList" aria-label="次の事例"><svg viewBox="0 0 32 12" aria-hidden="true"><path d="M1 6h29.5M25 .8 30.5 6 25 11.2"/></svg></button>
+        </div>
+      </div>
     </div>
   </section>
 
