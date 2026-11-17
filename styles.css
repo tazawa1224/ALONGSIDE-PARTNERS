@@ -598,6 +598,7 @@ ul,ol{list-style:none}
 
 /* 背景：斜めに重なる大きなガラス面と、右下のティールの面 */
 .works__plane{position:absolute;inset:0;display:block}
+.works__plane--a,.works__plane--b{display:none}   /* PCのデザインで外した2枚の面 */
 .works__plane--a{background:linear-gradient(160deg,rgba(255,255,255,.6),rgba(255,255,255,.14));clip-path:polygon(0 58%,100% 12%,100% 50%,0 95%)}
 .works__plane--b{background:linear-gradient(200deg,rgba(255,255,255,.7),rgba(255,255,255,0) 80%);clip-path:polygon(31% 38%,46% 0,68% 0,44% 58%)}
 .works__plane--c{background:linear-gradient(100deg,#0B8676 0%,#1E9C88 55%,#9AD4C7 100%);clip-path:polygon(58% 100%,100% 85%,100% 100%)}
@@ -605,14 +606,14 @@ ul,ol{list-style:none}
 /* 見出し：手書きロゴ、「事例紹介」、短い線、説明文を左に縦積み */
 .works.section{padding:clamp(56px,10vw,96px) 0 clamp(72px,12vw,120px)}
 .works__stage{position:relative;width:min(640px,calc(100% - var(--gutter) * 2));margin-inline:auto}
-.works__head{margin:0 0 32px}
-.works__logo{display:block;width:min(80vw,420px);height:auto;margin-left:-3%}
+.works__head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;margin:0 0 32px}
+.works__logo{grid-column:1 / -1;display:block;width:min(80vw,420px);height:auto;margin-left:-3%}
 .works__title{
-  margin:2px 0 0;font-family:var(--font-fv);font-weight:700;
-  font-size:clamp(2rem,8vw,2.7rem);line-height:1.3;letter-spacing:.14em;color:var(--ink-soft);
+  position:relative;margin:2px 0 0;padding-right:14px;font-family:var(--font-fv);font-weight:700;
+  font-size:clamp(1.8rem,7.4vw,2.7rem);line-height:1.3;letter-spacing:.14em;color:var(--ink-soft);
 }
-.works__title::after{content:"";display:block;width:44px;height:2px;margin-top:22px;background:var(--teal)}
-.works__lead{margin-top:20px;font-family:var(--font-fv);font-weight:500;font-size:.95rem;line-height:2.05;letter-spacing:.14em;color:#3B434A}
+.works__title::after{content:"";position:absolute;right:0;top:50%;width:2px;height:1.1em;background:var(--teal);transform:translateY(-50%)}   /* 見出しと説明文を分ける縦線 */
+.works__lead{margin:2px 0 0 16px;font-family:var(--font-fv);font-weight:500;font-size:clamp(.72rem,3.05vw,.95rem);line-height:2.05;letter-spacing:.08em;color:#3B434A}
 
 /* 事例カード（スマホと、JSが動かない時の縦並び）：斜めの白い板に、写真→本文の順 */
 .works__list{display:grid;gap:28px;margin:0;padding:0;list-style:none}
@@ -684,7 +685,19 @@ ul,ol{list-style:none}
 
 /* スマホ・タブレット：表示中の1枚だけを出し、切り替え時に横から差し込む */
 @media (max-width:1099px){
-  .work__img{inset:-9%;width:118%;height:118%}   /* 素材の斜めに切れた透明な角を枠の外へ */
+  .work__img{inset:-9%;width:118%;height:118%}
+  /* PCと同じく、側面を傾け上下の辺も右上がりにした板（狭い画面なので5°に弱める）。中身は逆に傾けて正立させる */
+  .work{margin-inline:16px}
+  .work__card{transform:skewX(-5deg);clip-path:polygon(0 18px,100% 0,100% calc(100% - 18px),0 100%)}
+  .work__media{margin-inline:-7%;transform:skewX(5deg)}
+  .work__body{transform:skewX(5deg);padding:4px 10% 34px}
+  .works__plane--c{clip-path:polygon(48% 100%,100% calc(100% - 56px),100% 100%)}   /* 右下の面はPCと同じく低く、送りボタンにかからない高さに */
+  .works__nav{gap:12px}
+  .works__arrow{width:60px;height:44px}
+  .works__dot{width:18px}
+  .works__dot[aria-current="true"]{width:34px}
+  .works__dot::before{width:10px}
+  .works__dot[aria-current="true"]::before{width:24px}   /* 素材の斜めに切れた透明な角を枠の外へ */
   .works.is-ready .work:not([data-pos="0"]){display:none}
   .works.is-ready .work[data-pos="0"]{animation:workIn .5s var(--ease)}
   .works.is-switching .work__media,.works.is-switching .work__body{opacity:0}
@@ -693,12 +706,12 @@ ul,ol{list-style:none}
 
 /* PC：見本の座標（幅1672）をそのまま比率で置く。中央の大きな板の右奥に、次の3枚を小さく重ねる */
 @media (min-width:1100px){
-  .works.section.is-ready{--u:calc(100vw / 1672);padding:0}
+  .works.section.is-ready{--u:calc(100vw / 1672);--cu:calc(var(--u) * 1.166);padding:0}   /* --cu：Figmaでカード一式を1.166倍にした分 */
   .works.is-ready .works__stage{width:auto;height:calc(var(--u) * 1194);margin:0}
   .works.is-ready .works__plane--a,.works.is-ready .works__plane--b{display:none}   /* Figmaで外した2枚の面 */
   .works.is-ready .works__plane--c{clip-path:polygon(58% 100%,100% calc(100% - var(--u) * 145),100% 100%)}
   .works.is-ready .works__light{top:calc(var(--u) * -41);left:-4%;width:108%;height:calc(var(--u) * 1837)}   /* Figmaで縦に伸ばした光 */
-  .works.is-ready .works__head{position:absolute;left:calc(var(--u) * 88);top:calc(var(--u) * 182);z-index:2;margin:0;display:grid;grid-template-columns:auto auto;align-items:center;justify-content:start}   /* 見出しと説明文を縦線をはさんで横に並べる */
+  .works.is-ready .works__head{position:absolute;left:calc(var(--u) * 88);top:calc(var(--u) * 116);z-index:2;margin:0;display:grid;grid-template-columns:auto auto;align-items:center;justify-content:start}   /* 見出しと説明文を縦線をはさんで横に並べる */
   .works.is-ready .works__logo{grid-column:1 / -1;width:calc(var(--u) * 485);margin:0}
   .works.is-ready .works__title{position:relative;margin:calc(var(--u) * -4) 0 0 calc(var(--u) * 15);padding-right:calc(var(--u) * 14);font-size:calc(var(--u) * 58);line-height:1.2;letter-spacing:.16em}
   .works.is-ready .works__title::after{position:absolute;right:0;top:50%;width:max(2px,calc(var(--u) * 3.5));height:calc(var(--u) * 46);margin:0;transform:translateY(-50%)}
@@ -708,9 +721,9 @@ ul,ol{list-style:none}
   .works.is-ready .works__list{display:block}
   .works.is-ready .work{
     position:absolute;pointer-events:auto;cursor:pointer;
-    left:calc(var(--u) * var(--x));top:calc(var(--u) * var(--y));width:calc(var(--u) * var(--w));height:calc(var(--u) * var(--h));
-    font-size:calc(var(--u) * var(--f,17));
-    filter:drop-shadow(0 calc(var(--u) * 30) calc(var(--u) * 40) rgba(15,55,50,.10));
+    left:calc(var(--u) * var(--x));top:calc(var(--u) * var(--y));width:calc(var(--cu) * var(--w));height:calc(var(--cu) * var(--h));
+    font-size:calc(var(--cu) * var(--f,17));
+    filter:drop-shadow(0 calc(var(--cu) * 30) calc(var(--cu) * 40) rgba(15,55,50,.10));
   }
   .works.is-ready .work__card{position:absolute;inset:0;clip-path:var(--clip)}
   .works.is-anim .work{transition:left .7s var(--ease),top .7s var(--ease),width .7s var(--ease),height .7s var(--ease),opacity .5s var(--ease)}   /* 最初の配置が済んでから動きをつける */
@@ -718,31 +731,31 @@ ul,ol{list-style:none}
   .works.is-switching .work__media,.works.is-switching .work__body{opacity:0}
 
   /* 置き場所：0=中央、1〜3=右奥、prev=左へ抜ける、hidden=右奥から入ってくる */
-  .works.is-ready .work[data-pos="0"]{--x:250;--y:366;--w:952;--h:560;--clip:polygon(11.2% 13.6%,100% 0,88.8% 86.4%,0 100%);z-index:6;cursor:default}
-  .works.is-ready .work[data-pos="1"]{--x:1080;--y:446;--w:300;--h:400;--f:18;--pt:79;--pl:92;--clip:polygon(27.9% 4.9%,100% 0,72.1% 95.1%,0 100%);z-index:5}
-  .works.is-ready .work[data-pos="2"]{--x:1250;--y:506;--w:240;--h:310;--f:13;--pt:59;--pl:108;--clip:polygon(27% 5.1%,100% 0,73% 94.9%,0 100%);z-index:4;opacity:.92}
-  .works.is-ready .work[data-pos="3"]{--x:1398;--y:540;--w:172;--h:240;--f:10.5;--pt:50;--pl:76;--clip:polygon(29.1% 4.7%,100% 0,70.9% 95.3%,0 100%);z-index:3;opacity:.8}
-  .works.is-ready .work[data-pos="prev"]{--x:-220;--y:366;--w:952;--h:560;--clip:polygon(11.2% 13.6%,100% 0,88.8% 86.4%,0 100%);z-index:7;opacity:0;pointer-events:none}
-  .works.is-ready .work[data-pos="hidden"]{--x:1520;--y:570;--w:150;--h:195;--f:9;--pt:40;--pl:60;--clip:polygon(27.2% 5%,100% 0,72.8% 95%,0 100%);z-index:2;opacity:0;pointer-events:none}
+  .works.is-ready .work[data-pos="0"]{--x:75.5;--y:340;--w:952;--h:560;--clip:polygon(11.2% 13.6%,100% 0,88.8% 86.4%,0 100%);z-index:6;cursor:default}
+  .works.is-ready .work[data-pos="1"]{--x:1042.7;--y:433;--w:300;--h:400;--f:18;--pt:79;--pl:92;--clip:polygon(27.9% 4.9%,100% 0,72.1% 95.1%,0 100%);z-index:5}
+  .works.is-ready .work[data-pos="2"]{--x:1241.2;--y:503;--w:240;--h:310;--f:13;--pt:59;--pl:108;--clip:polygon(27% 5.1%,100% 0,73% 94.9%,0 100%);z-index:4;opacity:.92}
+  .works.is-ready .work[data-pos="3"]{--x:1413.1;--y:543.4;--w:172;--h:240;--f:10.5;--pt:50;--pl:76;--clip:polygon(29.1% 4.7%,100% 0,70.9% 95.3%,0 100%);z-index:3;opacity:.8}
+  .works.is-ready .work[data-pos="prev"]{--x:-400;--y:340;--w:952;--h:560;--clip:polygon(11.2% 13.6%,100% 0,88.8% 86.4%,0 100%);z-index:7;opacity:0;pointer-events:none}
+  .works.is-ready .work[data-pos="hidden"]{--x:1650;--y:575;--w:150;--h:195;--f:9;--pt:40;--pl:60;--clip:polygon(27.2% 5%,100% 0,72.8% 95%,0 100%);z-index:2;opacity:0;pointer-events:none}
 
   /* 中央の板：左に番号・見出し・説明・タグ・リンク（板の斜辺に沿って行頭をずらす）、右に写真 */
   .works.is-ready .work[data-pos="0"] .work__media{position:absolute;top:0;right:0;bottom:0;width:66%;aspect-ratio:auto;
     -webkit-mask-image:linear-gradient(102deg,transparent 30%,#000 54%);mask-image:linear-gradient(102deg,transparent 30%,#000 54%)}
-  .works.is-ready .work[data-pos="0"] .work__body{position:absolute;left:0;top:0;width:62%;padding:calc(var(--u) * 146) 0 0}
-  .works.is-ready .work[data-pos="0"] .work__head{margin-left:calc(var(--u) * 192)}
-  .works.is-ready .work[data-pos="0"] .work__no{padding-right:calc(var(--u) * 86);font-size:calc(var(--u) * 62)}
-  .works.is-ready .work[data-pos="0"] .work__no::after{right:calc(var(--u) * 40);height:calc(var(--u) * 74);width:1.5px;transform:translate(50%,-50%) rotate(12.4deg)}
-  .works.is-ready .work[data-pos="0"] .work__who{font-size:max(20px,calc(var(--u) * 36));line-height:1.45;letter-spacing:.08em;white-space:nowrap}
-  .works.is-ready .work[data-pos="0"] .work__desc{max-width:calc(var(--u) * 420);margin:calc(var(--u) * 28) 0 0 calc(var(--u) * 166);font-size:max(12px,calc(var(--u) * 17));letter-spacing:.1em}
-  .works.is-ready .work[data-pos="0"] .work__tags{flex-wrap:nowrap;gap:calc(var(--u) * 14);margin:calc(var(--u) * 24) 0 0 calc(var(--u) * 148)}
-  .works.is-ready .work[data-pos="0"] .work__tags li{flex:none;font-size:max(11px,calc(var(--u) * 14));padding:.4em 1.1em}
-  .works.is-ready .work[data-pos="0"] .work__more{gap:calc(var(--u) * 20);margin:calc(var(--u) * 30) 0 0 calc(var(--u) * 130);font-size:max(12px,calc(var(--u) * 17))}
-  .works.is-ready .work[data-pos="0"] .work__more-icon{width:max(38px,calc(var(--u) * 46));height:max(28px,calc(var(--u) * 34))}
+  .works.is-ready .work[data-pos="0"] .work__body{position:absolute;left:0;top:0;width:62%;padding:calc(var(--cu) * 146) 0 0}
+  .works.is-ready .work[data-pos="0"] .work__head{margin-left:calc(var(--cu) * 192)}
+  .works.is-ready .work[data-pos="0"] .work__no{padding-right:calc(var(--cu) * 86);font-size:calc(var(--cu) * 62)}
+  .works.is-ready .work[data-pos="0"] .work__no::after{right:calc(var(--cu) * 40);height:calc(var(--cu) * 74);width:1.5px;transform:translate(50%,-50%) rotate(12.4deg)}
+  .works.is-ready .work[data-pos="0"] .work__who{font-size:max(20px,calc(var(--cu) * 36));line-height:1.45;letter-spacing:.08em;white-space:nowrap}
+  .works.is-ready .work[data-pos="0"] .work__desc{max-width:calc(var(--cu) * 420);margin:calc(var(--cu) * 28) 0 0 calc(var(--cu) * 166);font-size:max(12px,calc(var(--cu) * 17));letter-spacing:.1em}
+  .works.is-ready .work[data-pos="0"] .work__tags{flex-wrap:nowrap;gap:calc(var(--cu) * 14);margin:calc(var(--cu) * 24) 0 0 calc(var(--cu) * 148)}
+  .works.is-ready .work[data-pos="0"] .work__tags li{flex:none;font-size:max(11px,calc(var(--cu) * 14));padding:.4em 1.1em}
+  .works.is-ready .work[data-pos="0"] .work__more{gap:calc(var(--cu) * 20);margin:calc(var(--cu) * 30) 0 0 calc(var(--cu) * 130);font-size:max(12px,calc(var(--cu) * 17))}
+  .works.is-ready .work[data-pos="0"] .work__more-icon{width:max(38px,calc(var(--cu) * 46));height:max(28px,calc(var(--cu) * 34))}
 
   /* 右奥の板：番号と見出しだけを上に、写真を下に */
   .works.is-ready .work:not([data-pos="0"]) .work__media{position:absolute;left:0;right:0;bottom:0;height:44%;aspect-ratio:auto;
     -webkit-mask-image:linear-gradient(180deg,transparent,#000 38%);mask-image:linear-gradient(180deg,transparent,#000 38%)}
-  .works.is-ready .work:not([data-pos="0"]) .work__body{position:absolute;inset:0;padding:calc(var(--u) * var(--pt,60)) 0 0 calc(var(--u) * var(--pl,60))}
+  .works.is-ready .work:not([data-pos="0"]) .work__body{position:absolute;inset:0;padding:calc(var(--cu) * var(--pt,60)) 0 0 calc(var(--cu) * var(--pl,60))}
   .works.is-ready .work:not([data-pos="0"]) .work__card{background:linear-gradient(170deg,#fff,#F7FBFC)}
   .works.is-ready .work:not([data-pos="0"]) .work__head{flex-direction:column;align-items:flex-start}
   .works.is-ready .work:not([data-pos="0"]) .work__no{padding-right:.9em;font-size:1.7em}
@@ -752,17 +765,15 @@ ul,ol{list-style:none}
 
 
   .works.is-ready .works__nav{display:block;margin:0}
-  .works.is-ready .works__arrow{position:absolute;z-index:9;top:calc(var(--u) * 636);width:max(64px,calc(var(--u) * 84));height:max(44px,calc(var(--u) * 58));pointer-events:auto}
-  .works.is-ready .works__arrow--prev{left:calc(var(--u) * 96)}
-  .works.is-ready .works__arrow--next{left:calc(var(--u) * 1572)}
-  .works.is-ready .works__dots{position:absolute;left:0;right:0;top:calc(var(--u) * 938);justify-content:center;pointer-events:auto}
+  .works.is-ready .works__arrow{position:absolute;z-index:9;top:calc(var(--u) * 723.4);width:max(64px,calc(var(--u) * 84));height:max(44px,calc(var(--u) * 58));pointer-events:auto}
+  .works.is-ready .works__arrow--prev{left:calc(var(--u) * 94.9)}
+  .works.is-ready .works__arrow--next{left:calc(var(--u) * 1526.8);top:calc(var(--u) * 729.2)}   /* Figmaで04の板の右下に重ねた位置 */
+  .works.is-ready .works__dots{position:absolute;left:calc(var(--u) * 177.4);right:0;top:calc(var(--u) * 977);justify-content:center;pointer-events:auto}   /* 中心を少し右へ（Figmaの位置） */
+  .works.is-ready .works__dot{width:30px;height:42px}
+  .works.is-ready .works__dot[aria-current="true"]{width:47px}
+  .works.is-ready .works__dot::before{width:16px;height:5px}
+  .works.is-ready .works__dot[aria-current="true"]::before{width:35px}
 }
-/* PC幅が狭いとき：説明文の最小文字サイズで行が伸びる分、大きな板の左端を右へ寄せて重ならないようにする */
-@media (min-width:1100px) and (max-width:1439px){
-  .works.is-ready .work[data-pos="0"]{--x:290;--w:912;--clip:polygon(11.8% 12.9%,100% 0,88.2% 87.1%,0 100%)}
-  .works.is-ready .work[data-pos="prev"]{--w:912;--clip:polygon(11.8% 12.9%,100% 0,88.2% 87.1%,0 100%)}
-}
-
 /* =====================================================================
    MESSAGE
    ===================================================================== */
@@ -1016,8 +1027,7 @@ ul,ol{list-style:none}
   .svc__points li::before{width:28px;height:28px;background-size:13px}
   .message{padding-bottom:64px}
   .news__grid{grid-template-columns:minmax(0,1fr)}
-  .news__pick{--sk:0deg;margin-inline:0;border-radius:0}
-  .news__pick-img{transform:none}
+  .news__pick{--sk:-4deg;margin-inline:16px;border-radius:0}   /* PCと同じく斜めの板（狭い画面なので傾きを弱める） */
   .news__pick-body{padding:14px 22px 26px}
   .news__pick-arrow{top:10px;right:20px;bottom:auto;width:44px;height:44px}   /* 狭い画面では右上に置き、文字幅を確保する */
   .news__pick-title{font-size:1.14rem}
